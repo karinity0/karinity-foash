@@ -1,0 +1,18 @@
+.expander-grid {
+  display: flex;
+  width: 100%;
+  height: 250vh;
+  border-radius: 1rem;
+  gap: 0;
+  overflow: hidden;
+  margin-top: 4rem;
+}
+
+.expander-grid .expander-card {
+  width: 33.33%;
+  height: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: none; /* GSAP handles all animations */
+  flex-shrink: 0;
+}
