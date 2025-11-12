@@ -536,22 +536,23 @@ const Menu = ({ pageRef }) => {
         <div className="relative w-36 h-auto justify-self-end">
           <LogoKarinity />
         </div>
-        {/* <div
-          className="nav-toggle col-span-3"
-          ref={navToggleRef}
-          onClick={toggleMenu}
-        >
-          <div className="nav-toggle-wrapper">
-            <p ref={openLabelRef} className="open-label">
-              Menu
-            </p>
-
-            <p ref={closeLabelRef} className="close-label">
-              Close
-            </p>
-          </div>
-        </div> */}
       </nav>
+
+      {/* <div
+        className="nav-toggle col-span-3"
+        ref={navToggleRef}
+        onClick={toggleMenu}
+      >
+        <div className="nav-toggle-wrapper">
+          <p ref={openLabelRef} className="open-label">
+            Menu
+          </p>
+
+          <p ref={closeLabelRef} className="close-label">
+            Close
+          </p>
+        </div>
+      </div> */}
 
       <div className="menu-overlay" ref={menuOverlayRef}>
         <div className="menu-content">
