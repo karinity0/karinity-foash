@@ -5,21 +5,12 @@ nav {
   width: 100vw;
   padding: 2rem;
   color: var(--base-100);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   z-index: 2;
 }
 
 nav .nav-logo a {
   display: block;
   width: 6rem;
-}
-
-nav .nav-logo svg {
-  width: 30%;
-  height: 30%;
-  object-fit: cover;
 }
 
 nav .nav-toggle {

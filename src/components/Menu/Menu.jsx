@@ -6,7 +6,8 @@ import { SplitText } from "gsap/all";
 import { useGSAP } from "@gsap/react";
 import { useLenis } from "lenis/react";
 import { useViewTransition } from "@/hooks/useViewTransition";
-import { Logo } from "./logo";
+import { LogoFoash } from "./logoFoash";
+import { LogoKarinity } from "./logoKarinity";
 
 gsap.registerPlugin(useGSAP, SplitText);
 
@@ -456,12 +457,90 @@ const Menu = ({ pageRef }) => {
 
   return (
     <>
-      <nav>
-        <div className="nav-logo">
-          <Logo />
+      <nav className="grid grid-cols-3 items-center w-full">
+        <div className="relative w-32 h-auto justify-self-start">
+          <LogoFoash />
         </div>
 
-        <div className="nav-toggle" ref={navToggleRef} onClick={toggleMenu}>
+        {/* Both Logos */}
+        <div className="flex items-center gap-1 justify-self-center">
+          {/* KARINITY SVG */}
+          <svg
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlnsXlink="http://www.w3.org/1999/xlink"
+            x="0px"
+            y="0px"
+            viewBox="100 430 200 310"
+            xmlSpace="preserve"
+            className="h-14 w-auto"
+          >
+            <g>
+              <g>
+                <path d="M175.97,443.22h-49.59v33.28c13.15-13.24,30.36-22.43,49.59-25.5V443.22z" />
+                <polygon points="175.68,636.66 175.96,636.76 175.96,636.78 175.68,636.7 		" />
+                <path
+                  d="M204.93,539.99l66.4,30.96l-2.61,5.62c-14.18,30.35-44.95,49.95-78.43,49.95c-3.73,0-7.41-0.23-11.01-0.7
+                    v-12.49c3.59,0.54,7.26,0.83,11.01,0.83c26.4,0,51.24-14.54,64.36-37.33l-75.37-35.15l-3.31-1.54v-0.29l3.31-1.54l75.37-35.17
+                    c-13.12-22.78-37.96-37.32-64.36-37.32c-3.64,0-7.22,0.27-10.72,0.77c-1.2,0.18-2.41,0.38-3.6,0.61
+                    c-21.1,4.14-39.01,17.26-49.59,35.19c-0.79,1.33-1.55,2.7-2.23,4.09c-0.36,0.68-0.71,1.39-1.03,2.07
+                    c-4.49,9.55-6.99,20.19-6.99,31.42c0,10.92,2.38,21.32,6.65,30.65v23.41c-11.89-14.82-19.01-33.62-19.01-54.05
+                    c0-20.45,7.12-39.26,19.01-54.07c1.15-1.44,2.36-2.85,3.6-4.2c12.78-14.02,30.09-23.82,49.59-27.08c1.17-0.19,2.36-0.37,3.57-0.5
+                    c3.52-0.45,7.12-0.68,10.76-0.68c33.47,0,64.25,19.62,78.43,49.96l2.61,5.6L204.93,539.99z"
+                  fill="black"
+                />
+                <path
+                  d="M211.51,504.14c5.49,0,10.33-3.7,11.78-8.99l0.47-1.73l-1.62-0.76l-19.67-9.17l-5.18-2.41l-1.79,3.84
+                    l4.75,2.22c-0.64,1.5-0.97,3.12-0.97,4.78C199.28,498.65,204.77,504.14,211.51,504.14z M204.1,488.92l14.45,6.74
+                    c-1.36,2.56-4.06,4.23-7.04,4.23c-4.4,0-7.99-3.58-7.99-7.99C203.52,490.88,203.72,489.86,204.1,488.92z"
+                  fill="black"
+                />
+              </g>
+              <path
+                d="M153.09,480.05c-0.59,0.36-1.17,0.73-1.74,1.12c-3.96,2.63-7.64,5.65-10.98,9.01c-5.74,5.75-10.48,12.47-13.98,19.89v8.37
+                  l21.42,21.54l-0.02,0.01l-7.12,7.12l-14.28,14.28v75.36h49.29v-0.06h0.01v-0.03l0.28,0.09V470.9
+                  C167.73,472.6,160.01,475.74,153.09,480.05z"
+              />
+            </g>
+          </svg>
+
+          {/* Separator */}
+          <div
+            className="bg-black w-px h-8 self-center"
+            style={{ marginBottom: "10px" }}
+          />
+
+          {/* FOASH SVG */}
+          <svg
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlnsXlink="http://www.w3.org/1999/xlink"
+            x="0px"
+            y="0px"
+            viewBox="250 440 200 310"
+            xmlSpace="preserve"
+            className="h-14 w-auto"
+          >
+            <g className="fill-black">
+              <path
+                d="M429.31,502.88c0,0.01-4.47,28.87-33.13,28.87c0,0,0,0,0,0.01c6.96,7.81,11.1,18.19,10.78,29.54
+                  c-0.64,22.64-19.25,40.99-41.89,41.33c-23.81,0.36-43.22-18.83-43.22-42.56c0-23.51,19.06-42.56,42.56-42.56h0.04
+                  c1.83,0,3.48-1.07,4.23-2.74c3.48-7.83,12.9-29.04,12.9-29.04c2.23-5.02-0.99-10.83-6.44-11.5c-3.86-0.48-7.8-0.7-11.8-0.65
+                  c-46.91,0.57-85.12,39-85.43,85.91c-0.32,48.33,39,87.56,87.37,87.09c45.84-0.45,84.88-39.22,85.63-85.06
+                  C451.27,539.02,443.05,518.46,429.31,502.88z"
+              />
+            </g>
+          </svg>
+        </div>
+
+        <div className="relative w-36 h-auto justify-self-end">
+          <LogoKarinity />
+        </div>
+        {/* <div
+          className="nav-toggle col-span-3"
+          ref={navToggleRef}
+          onClick={toggleMenu}
+        >
           <div className="nav-toggle-wrapper">
             <p ref={openLabelRef} className="open-label">
               Menu
@@ -471,7 +550,7 @@ const Menu = ({ pageRef }) => {
               Close
             </p>
           </div>
-        </div>
+        </div> */}
       </nav>
 
       <div className="menu-overlay" ref={menuOverlayRef}>

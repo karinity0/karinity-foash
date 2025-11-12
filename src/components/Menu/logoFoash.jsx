@@ -6,7 +6,7 @@ import { useRef } from "react";
 
 gsap.registerPlugin(useGSAP, DrawSVGPlugin);
 
-export const Logo = () => {
+export const LogoFoash = () => {
   const timelineRef = useRef(null);
 
   useGSAP(() => {
@@ -22,6 +22,7 @@ export const Logo = () => {
     gsap.set(oLetter, {
       opacity: 1,
       scale: 1,
+      fill: "#d10000",
       transformOrigin: "center center",
     });
 
@@ -42,7 +43,7 @@ export const Logo = () => {
         oLetter,
         {
           scale: 1.5,
-          fill: "red",
+          fill: "#d10000",
           duration: 1,
           ease: "back.out(1.5)",
         },
@@ -59,7 +60,7 @@ export const Logo = () => {
         scale: 1,
         rotation: 0,
 
-        fill: "black",
+        fill: "#d10000",
         duration: 0.8,
         ease: "back.in(1.5)",
       })
@@ -96,7 +97,7 @@ export const Logo = () => {
       xmlnsXlink="http://www.w3.org/1999/xlink"
       x="0px"
       y="0px"
-      viewBox="150 430 820 310"
+      viewBox="100 430 920 310"
       className=" cursor-pointer"
       xmlSpace="preserve"
       onMouseEnter={handleMouseEnter}
@@ -114,6 +115,7 @@ export const Logo = () => {
             c1.83,0,3.48-1.07,4.23-2.74c3.48-7.83,12.9-29.04,12.9-29.04c2.23-5.02-0.99-10.83-6.44-11.5c-3.86-0.48-7.8-0.7-11.8-0.65
             c-46.91,0.57-85.12,39-85.43,85.91c-0.32,48.33,39,87.56,87.37,87.09c45.84-0.45,84.88-39.22,85.63-85.06
             C451.27,539.02,443.05,518.46,429.31,502.88z"
+          className="fill-[#d10000]"
         />
         {/* A */}
         <path

@@ -56,6 +56,75 @@ export default function PreLoader() {
 
       if (!letters.length || !pacmanGroup) return;
 
+      // Programming crumbs symbols
+      const crumbSymbols = [
+        "</>",
+        "{}",
+        "()",
+        "[]",
+        ";",
+        "//",
+        "/*",
+        "*/",
+        "=>",
+        "!=",
+        "==",
+        "&&",
+        "||",
+        "<",
+        ">",
+        "#",
+        "$",
+        "fn",
+        "var",
+        "0x",
+        "++",
+        "--",
+      ];
+
+      // Function to create and animate crumbs
+      const createCrumbs = (letterElement, letterBounds) => {
+        const numCrumbs = gsap.utils.random(2, 5, 1); // 5-10 crumbs per letter
+        const crumbs = [];
+
+        for (let i = 0; i < numCrumbs; i++) {
+          const crumb = document.createElementNS(
+            "http://www.w3.org/2000/svg",
+            "text"
+          );
+          const symbol =
+            crumbSymbols[Math.floor(Math.random() * crumbSymbols.length)];
+
+          crumb.textContent = symbol;
+          crumb.setAttribute("x", letterBounds.centerX);
+          crumb.setAttribute("y", letterBounds.centerY);
+          crumb.setAttribute("font-size", gsap.utils.random(40, 50));
+          crumb.setAttribute("fill", "#333");
+          crumb.setAttribute("opacity", 0.3);
+          crumb.setAttribute("font-family", "monospace");
+          crumb.setAttribute("font-weight", "bold");
+          crumb.style.pointerEvents = "none";
+
+          mainGroup.appendChild(crumb);
+          crumbs.push(crumb);
+
+          // Animate crumb falling
+          gsap.to(crumb, {
+            y: `+=${gsap.utils.random(500, 750)}`,
+            x: `+=${gsap.utils.random(-40, 40)}`,
+            opacity: 0,
+            rotation: gsap.utils.random(-180, 180),
+            duration: gsap.utils.random(0.6, 1.2),
+            ease: "power2.inOut",
+            onComplete: () => {
+              crumb.remove();
+            },
+          });
+        }
+
+        return crumbs;
+      };
+
       // Calculate positions for Pac-Man movement
       const svgBounds = karinityRef.current.getBBox();
       const pacmanBounds = pacmanGroup.getBBox();
@@ -84,16 +153,62 @@ export default function PreLoader() {
 
       // Animate pac-man mouth opening/closing continuously
       // The mouth is the main body path (second path with class st0 in the pac-man group)
-      const mouthPath = pacmanGroup;
+      // There are multiple .st0 elements, so we need to find the one with our specific coordinates
+      const allSt0Paths = pacmanGroup.querySelectorAll("path.st0");
+      const mouthPath = Array.from(allSt0Paths).find((path) => {
+        const d = path.getAttribute("d");
+        return d && d.includes("l-2.61,5.62") && d.includes("l-75.37-35.15");
+      });
+
+      // Store the original path string (outside if block so it's accessible in timeline onComplete)
+      const originalMouthPath = mouthPath?.getAttribute("d");
       let mouthAnimation = null;
-      if (mouthPath) {
-        mouthAnimation = gsap.to(mouthPath, {
-          rotation: 15,
+
+      if (mouthPath && originalMouthPath) {
+        // Use the original path for replacements
+        const basePath = originalMouthPath;
+
+        // Original path coordinates
+        const closedMouth = {
+          upperJawY: 5.62, // Top jaw line (original: l-2.61,5.62)
+          lowerJawY: -35.15, // Bottom jaw line (original: l-75.37-35.15)
+        };
+
+        // Open mouth coordinates (wider angle for chomping effect)
+        const openMouth = {
+          upperJawY: 10, // Moves up more (wider top jaw)
+          lowerJawY: -40, // Moves down more (wider bottom jaw)
+        };
+
+        // Create the animation object to interpolate
+        const mouthState = { ...closedMouth };
+
+        mouthAnimation = gsap.to(mouthState, {
+          upperJawY: openMouth.upperJawY,
+          lowerJawY: openMouth.lowerJawY,
           duration: 0.15,
           repeat: -1,
           yoyo: true,
           ease: "power1.inOut",
-          transformOrigin: "center center",
+          onUpdate: () => {
+            // Build new path by replacing coordinates in the base path
+            let newPath = basePath;
+
+            // Replace the upper jaw coordinate (l-2.61,5.62 -> new values)
+            newPath = newPath.replace(
+              /l-2\.61,5\.62/,
+              `l-2.61,${mouthState.upperJawY.toFixed(2)}`
+            );
+
+            // Replace the lower jaw coordinate (l-75.37-35.15 -> new values)
+            // Note: negative numbers don't have space, so format carefully
+            newPath = newPath.replace(
+              /l-75\.37-35\.15/,
+              `l-75.37${mouthState.lowerJawY.toFixed(2)}`
+            );
+
+            mouthPath.setAttribute("d", newPath);
+          },
         });
       }
 
@@ -111,10 +226,10 @@ export default function PreLoader() {
         repeat: 0,
         onComplete: () => {
           // Stop the mouth animation when letters finish
-          if (mouthAnimation && mouthPath) {
+          if (mouthAnimation && mouthPath && originalMouthPath) {
             mouthAnimation.kill();
-            // Reset mouth to closed position
-            gsap.set(mouthPath, { rotation: 0 });
+            // Reset mouth path to original state
+            mouthPath.setAttribute("d", originalMouthPath);
           }
           setKarinityComplete(true);
         },
@@ -149,6 +264,10 @@ export default function PreLoader() {
             opacity: 0,
             duration: 0.18,
             ease: "back.in(1.2)",
+            onStart: () => {
+              // Create programming crumbs when letter starts being eaten
+              createCrumbs(letterPos.element, letterPos);
+            },
           },
           eatTime - 0.06
         );
@@ -171,7 +290,6 @@ export default function PreLoader() {
   );
 
   // Separator Animation - grows from middle to complete vertically, synced with karinity and foash
-
   useGSAP(
     () => {
       if (!separatorRef.current) return;
@@ -182,6 +300,7 @@ export default function PreLoader() {
       gsap.set(separatorRef.current, {
         scaleY: 0,
         transformOrigin: "center center",
+        marginBottom: "50px",
         opacity: 1,
       });
 
@@ -189,7 +308,7 @@ export default function PreLoader() {
       tl.to(separatorRef.current, {
         scaleY: 1,
         duration: 3.7,
-        ease: "power2.in",
+        ease: "power2.out",
       });
     },
     {
@@ -237,7 +356,7 @@ export default function PreLoader() {
         oLetter,
         {
           scale: 1.3,
-          fill: "red",
+          fill: "#d10000",
           duration: 1,
           ease: "back.out(1.5)",
         },
@@ -271,7 +390,7 @@ export default function PreLoader() {
           },
           "-=0.6"
         )
-        // Final phase: Hide other letters and show only O in red
+        // Final phase: Hide other letters and show only O in #d10000
         .to(
           otherLetters,
           {
@@ -286,7 +405,7 @@ export default function PreLoader() {
         .to(
           oLetter,
           {
-            fill: "red",
+            fill: "#d10000",
             duration: 0.2,
             ease: "power2.out",
           },
@@ -434,7 +553,7 @@ export default function PreLoader() {
           </g>
         </g>
       </svg>
-      <div className="bg-black w-1 h-96" ref={separatorRef} />
+      <div className="bg-black w-1 h-32 self-center" ref={separatorRef} />
       {/* FOASH - Left Side */}
       <svg
         version="1.1"

@@ -33,7 +33,7 @@ const Page = () => {
 
   return (
     <>
-      <PreLoader />
+      {/* <PreLoader /> */}
 
       <section className="hero">
         <div className="container">
@@ -48,14 +48,9 @@ const Page = () => {
             </div>
 
             <div className="hero-footer">
-              <Copy animateOnScroll={false} delay={isInitialLoad ? 6.05 : 1.15}>
-                <p className="lg">
-                  We build websites, apps, and brands for people who like their
-                  creativity a little unpredictable.
-                </p>
-              </Copy>
-
-              <Button delay={isInitialLoad ? 6.35 : 1.55}>Scroll Down</Button>
+              <Button delay={isInitialLoad ? 6.35 : 1.55}>
+                Choose Your Path
+              </Button>
             </div>
           </div>
         </div>
