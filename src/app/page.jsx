@@ -13,6 +13,8 @@ import ExpanderLayout from "@/components/ExpanderLayout/ExpanderLayout";
 import React, { useEffect } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import gsap from "gsap";
+import { WDP } from "@/components/Home/WDP";
+import { Title } from "@/components/Home/Title";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -37,10 +39,17 @@ const Page = () => {
 
       <section className="hero">
         <div className="container">
-          <ExpanderLayout />
           <div className="hero-content-main">
-            <div></div>
-            <div className="hero-footer-outer">
+            <div className="w-full h-full flex items-center justify-center px-3 sm:px-4 md:px-6 lg:px-8">
+              <div className="flex flex-col items-center justify-center relative w-full max-w-7xl h-auto min-h-[60vh] sm:min-h-[70vh] md:h-[80%] py-8 sm:py-12 md:py-0">
+                {/* Main heading group */}
+                <Title />
+
+                {/* Letters */}
+                <WDP />
+              </div>
+            </div>
+            <div className="hero-footer-outer hidden lg:block">
               <Copy animateOnScroll={false} delay={isInitialLoad ? 6.35 : 1.65}>
                 <p className="sm">&copy; FOASH & KARINITY</p>
                 <p className="sm">( UNLIMITED WORKSPACE )</p>
@@ -56,9 +65,9 @@ const Page = () => {
         </div>
       </section>
 
-      {/* <Showreel />
+      {/* <Showreel /> */}
 
-      <section className="featured-work">
+      {/* <section className="featured-work">
         <div className="container">
           <div className="featured-work-header-content">
             <div className="featured-work-header">
@@ -104,9 +113,9 @@ const Page = () => {
 
           <FeaturedWork />
         </div>
-      </section>
+      </section> */}
 
-      <section className="client-reviews-header-container">
+      {/* <section className="client-reviews-header-container">
         <div className="container">
           <div className="client-reviews-header-content">
             <div className="client-reviews-header">
@@ -150,15 +159,15 @@ const Page = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
-      <ClientReviews />
+      {/* <ClientReviews /> */}
 
       <Spotlight />
 
-      <CTACard />
+      {/* <CTACard /> */}
 
-      <Footer /> */}
+      {/* <Footer /> */}
     </>
   );
 };

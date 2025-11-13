@@ -72,7 +72,7 @@ export const LogoKarinity = () => {
           crumb.setAttribute("x", letterBounds.centerX);
           crumb.setAttribute("y", letterBounds.centerY);
           crumb.setAttribute("font-size", gsap.utils.random(40, 50));
-          crumb.setAttribute("fill", "#333");
+          crumb.setAttribute("fill", "white");
           crumb.setAttribute("opacity", 0.5);
           crumb.setAttribute("font-family", "monospace");
           crumb.setAttribute("font-weight", "bold");
@@ -205,6 +205,31 @@ export const LogoKarinity = () => {
             // Reset mouth path to original state
             mouthPath.setAttribute("d", originalMouthPath);
           }
+
+          // Smoothly animate viewBox to only show pacman
+          const pacmanViewBox = pacmanGroup.getBBox();
+          const currentViewBox = { x: 100, y: 420, width: 920, height: 310 };
+          const targetViewBox = {
+            x: pacmanViewBox.x - 20,
+            y: pacmanViewBox.y - 20,
+            width: pacmanViewBox.width + 40,
+            height: pacmanViewBox.height + 40,
+          };
+
+          gsap.to(currentViewBox, {
+            x: targetViewBox.x,
+            y: targetViewBox.y,
+            width: targetViewBox.width,
+            height: targetViewBox.height,
+            duration: 0.8,
+            ease: "power2.inOut",
+            onUpdate: () => {
+              karinityRef.current.setAttribute(
+                "viewBox",
+                `${currentViewBox.x} ${currentViewBox.y} ${currentViewBox.width} ${currentViewBox.height}`
+              );
+            },
+          });
         },
       });
 
@@ -274,7 +299,8 @@ export const LogoKarinity = () => {
         letters,
         {
           scale: 1,
-          opacity: 1,
+          opacity: 0,
+          display: "none",
         },
         moveDuration
       );
@@ -288,8 +314,38 @@ export const LogoKarinity = () => {
 
   const handleMouseEnter = () => {
     if (timelineRef.current && !timelineRef.current.isActive()) {
-      // Only restart if the animation is not currently playing
-      timelineRef.current.restart();
+      // Smoothly animate viewBox back to show full logo before restarting animation
+      if (karinityRef.current) {
+        const currentViewBox = karinityRef.current
+          .getAttribute("viewBox")
+          .split(" ")
+          .map(Number);
+        const viewBoxObj = {
+          x: currentViewBox[0],
+          y: currentViewBox[1],
+          width: currentViewBox[2],
+          height: currentViewBox[3],
+        };
+
+        gsap.to(viewBoxObj, {
+          x: 100,
+          y: 420,
+          width: 920,
+          height: 310,
+          duration: 0.6,
+          ease: "power2.inOut",
+          onUpdate: () => {
+            karinityRef.current.setAttribute(
+              "viewBox",
+              `${viewBoxObj.x} ${viewBoxObj.y} ${viewBoxObj.width} ${viewBoxObj.height}`
+            );
+          },
+          onComplete: () => {
+            // Only restart after viewBox animation completes
+            timelineRef.current.restart();
+          },
+        });
+      }
     }
   };
 
@@ -301,13 +357,13 @@ export const LogoKarinity = () => {
       xmlnsXlink="http://www.w3.org/1999/xlink"
       x="0px"
       y="0px"
-      viewBox="100 430 920 310"
+      viewBox="100 420 920 310"
       ref={karinityRef}
       xmlSpace="preserve"
-      className="cursor-pointer"
+      className="cursor-pointer h-full w-fit"
       onMouseEnter={handleMouseEnter}
     >
-      <g>
+      <g fill="white">
         <g>
           <path
             d="M332.65,530.71h-13.71l-5.66,5.66l-2.98-2.98l9.94-9.99v-19.57H301.7v28.12l8,8.05l-8,8v28.17h18.53v-26.88h12.42
@@ -363,14 +419,12 @@ export const LogoKarinity = () => {
           c-4.49,9.55-6.99,20.19-6.99,31.42c0,10.92,2.38,21.32,6.65,30.65v23.41c-11.89-14.82-19.01-33.62-19.01-54.05
           c0-20.45,7.12-39.26,19.01-54.07c1.15-1.44,2.36-2.85,3.6-4.2c12.78-14.02,30.09-23.82,49.59-27.08c1.17-0.19,2.36-0.37,3.57-0.5
           c3.52-0.45,7.12-0.68,10.76-0.68c33.47,0,64.25,19.62,78.43,49.96l2.61,5.6L204.93,539.99z"
-              fill="#d10000"
             />
             <path
               className="st0"
               d="M211.51,504.14c5.49,0,10.33-3.7,11.78-8.99l0.47-1.73l-1.62-0.76l-19.67-9.17l-5.18-2.41l-1.79,3.84
           l4.75,2.22c-0.64,1.5-0.97,3.12-0.97,4.78C199.28,498.65,204.77,504.14,211.51,504.14z M204.1,488.92l14.45,6.74
           c-1.36,2.56-4.06,4.23-7.04,4.23c-4.4,0-7.99-3.58-7.99-7.99C203.52,490.88,203.72,489.86,204.1,488.92z"
-              fill="#d10000"
             />
           </g>
           <path

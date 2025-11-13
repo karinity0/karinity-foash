@@ -1,8 +1,9 @@
 "use client";
-import { useLayoutEffect, useRef } from "react";
+import { useRef } from "react";
 import gsap from "gsap";
 import "./ExpanderLayout.css";
 import { Web } from "./web";
+import { useGSAP } from "@gsap/react";
 
 // FIXME: Remove this when we go to production
 const STUCK_CARD_INDEX = null;
@@ -20,7 +21,7 @@ const ExpanderLayout = () => {
   const component2Ref = useRef(null);
   const component3Ref = useRef(null);
 
-  useLayoutEffect(() => {
+  useGSAP(() => {
     const grid = gridRef.current;
     const cards = [card1Ref.current, card2Ref.current, card3Ref.current];
     const components = [
@@ -79,7 +80,6 @@ const ExpanderLayout = () => {
 
           // Change background color to black
           const colorAnim = gsap.to(card, {
-            backgroundColor: "#000",
             duration: 1,
             ease: "power2.out",
             delay: 0.2,

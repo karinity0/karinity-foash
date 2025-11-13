@@ -427,7 +427,7 @@ export default function PreLoader() {
     }
   );
 
-  // Preloader closing animation (after SVG completes)
+  // // Preloader closing animation (after SVG completes)
   useGSAP(
     () => {
       if (
@@ -475,7 +475,7 @@ export default function PreLoader() {
         xmlnsXlink="http://www.w3.org/1999/xlink"
         x="0px"
         y="0px"
-        viewBox="100 430 920 310"
+        viewBox="100 420 920 310"
         ref={karinityRef}
         xmlSpace="preserve"
       >
@@ -553,7 +553,10 @@ export default function PreLoader() {
           </g>
         </g>
       </svg>
-      <div className="bg-black w-1 h-32 self-center" ref={separatorRef} />
+      <div
+        className="bg-black w-1 h-32 self-center mt-[15px]!"
+        ref={separatorRef}
+      />
       {/* FOASH - Left Side */}
       <svg
         version="1.1"
@@ -562,7 +565,7 @@ export default function PreLoader() {
         xmlnsXlink="http://www.w3.org/1999/xlink"
         x="0px"
         y="0px"
-        viewBox="100 440 920 310"
+        viewBox="100 435 920 310"
         xmlSpace="preserve"
         ref={foashRef}
       >

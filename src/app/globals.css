@@ -1,11 +1,16 @@
 @import "tailwindcss";
 @import "./fonts.css";
 
+@theme {
+  --breakpoint-xs: 475px;
+  --breakpoint-2xl: 1536px;
+}
+
 :root {
   --base-100: #e3e3db;
   --base-200: #ccccc4;
   --base-300: #8c7e77;
-  --base-400: #1a1614;
+  --base-400: #b6a2a2;
   --base-500: #ff6e14;
 
   --accent-1: #3d2fa9;
@@ -60,7 +65,7 @@ h3 {
 }
 
 h4 {
-  font-size: 3rem;
+  font-size: 2rem;
   letter-spacing: -0.1rem;
 }
 
@@ -167,4 +172,17 @@ p.cap {
   h1 {
     font-size: 10rem;
   }
+}
+
+/* 3D Text Animation Styles */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.perspective-1000 .char {
+  display: inline-block;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  will-change: transform;
+  transition: color 0.3s ease;
 }

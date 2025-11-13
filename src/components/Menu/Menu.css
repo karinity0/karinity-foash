@@ -5,7 +5,7 @@ nav {
   width: 100vw;
   padding: 2rem;
   color: var(--base-100);
-  z-index: 2;
+  z-index: 999;
 }
 
 nav .nav-logo a {
@@ -44,7 +44,7 @@ nav .close-label {
   overflow: hidden;
   background-color: var(--base-400);
   color: var(--base-100);
-  z-index: 1;
+  z-index: 99;
   will-change: clip-path;
 }
 
@@ -186,7 +186,7 @@ nav .nav-toggle-wrapper {
   align-items: center;
   height: 2.5rem;
   overflow: hidden;
-  background-color: var(--base-200);
+  background-color: var(--base-100);
   border-radius: 0.5rem;
   clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
   z-index: 2;

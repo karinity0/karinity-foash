@@ -8,6 +8,7 @@ gsap.registerPlugin(useGSAP, DrawSVGPlugin);
 
 export const LogoFoash = () => {
   const timelineRef = useRef(null);
+  const svgRef = useRef(null);
 
   useGSAP(() => {
     const allShapes = gsap.utils.toArray("#logo polygon, #logo path");
@@ -22,7 +23,7 @@ export const LogoFoash = () => {
     gsap.set(oLetter, {
       opacity: 1,
       scale: 1,
-      fill: "#d10000",
+      fill: "white",
       transformOrigin: "center center",
     });
 
@@ -37,13 +38,41 @@ export const LogoFoash = () => {
     const tl = gsap
       .timeline({
         repeat: 0,
+        onComplete: () => {
+          // Smoothly animate viewBox to only show the O letter
+          if (svgRef.current && oLetter) {
+            const oLetterBounds = oLetter.getBBox();
+            const currentViewBox = { x: 100, y: 430, width: 920, height: 310 };
+            const targetViewBox = {
+              x: oLetterBounds.x - 20,
+              y: oLetterBounds.y - 20,
+              width: oLetterBounds.width + 40,
+              height: oLetterBounds.height + 40,
+            };
+
+            gsap.to(currentViewBox, {
+              x: targetViewBox.x,
+              y: targetViewBox.y,
+              width: targetViewBox.width,
+              height: targetViewBox.height,
+              duration: 0.8,
+              ease: "power2.inOut",
+              onUpdate: () => {
+                svgRef.current.setAttribute(
+                  "viewBox",
+                  `${currentViewBox.x} ${currentViewBox.y} ${currentViewBox.width} ${currentViewBox.height}`
+                );
+              },
+            });
+          }
+        },
       })
       // Phase 2: O scales up and becomes the focus
       .to(
         oLetter,
         {
           scale: 1.5,
-          fill: "#d10000",
+          fill: "white",
           duration: 1,
           ease: "back.out(1.5)",
         },
@@ -60,7 +89,7 @@ export const LogoFoash = () => {
         scale: 1,
         rotation: 0,
 
-        fill: "#d10000",
+        fill: "white",
         duration: 0.8,
         ease: "back.in(1.5)",
       })
@@ -69,8 +98,8 @@ export const LogoFoash = () => {
         {
           opacity: 1,
           scale: 1,
-
-          fill: "black",
+          display: "none",
+          fill: "white",
           x: 0,
           duration: 1,
           se: "back.out(1.2)",
@@ -85,10 +114,41 @@ export const LogoFoash = () => {
 
   const handleMouseEnter = () => {
     if (timelineRef.current && !timelineRef.current.isActive()) {
-      // Only restart if the animation is not currently playing
-      timelineRef.current.restart();
+      // Smoothly animate viewBox back to show full logo before restarting animation
+      if (svgRef.current) {
+        const currentViewBox = svgRef.current
+          .getAttribute("viewBox")
+          .split(" ")
+          .map(Number);
+        const viewBoxObj = {
+          x: currentViewBox[0],
+          y: currentViewBox[1],
+          width: currentViewBox[2],
+          height: currentViewBox[3],
+        };
+
+        gsap.to(viewBoxObj, {
+          x: 100,
+          y: 430,
+          width: 920,
+          height: 310,
+          duration: 0.6,
+          ease: "power2.inOut",
+          onUpdate: () => {
+            svgRef.current.setAttribute(
+              "viewBox",
+              `${viewBoxObj.x} ${viewBoxObj.y} ${viewBoxObj.width} ${viewBoxObj.height}`
+            );
+          },
+          onComplete: () => {
+            // Only restart after viewBox animation completes
+            timelineRef.current.restart();
+          },
+        });
+      }
     }
   };
+
   return (
     <svg
       version="1.1"
@@ -98,11 +158,12 @@ export const LogoFoash = () => {
       x="0px"
       y="0px"
       viewBox="100 430 920 310"
-      className=" cursor-pointer"
+      ref={svgRef}
+      className="cursor-pointer h-full w-fit"
       xmlSpace="preserve"
       onMouseEnter={handleMouseEnter}
     >
-      <g>
+      <g fill="white">
         {/* F */}
         <polygon
           points="151.69,637.14 191.86,637.14 191.86,579.82 247.31,579.82 247.31,541.99 191.86,541.99 191.86,510.75 
@@ -115,7 +176,6 @@ export const LogoFoash = () => {
             c1.83,0,3.48-1.07,4.23-2.74c3.48-7.83,12.9-29.04,12.9-29.04c2.23-5.02-0.99-10.83-6.44-11.5c-3.86-0.48-7.8-0.7-11.8-0.65
             c-46.91,0.57-85.12,39-85.43,85.91c-0.32,48.33,39,87.56,87.37,87.09c45.84-0.45,84.88-39.22,85.63-85.06
             C451.27,539.02,443.05,518.46,429.31,502.88z"
-          className="fill-[#d10000]"
         />
         {/* A */}
         <path
