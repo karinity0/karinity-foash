@@ -7,21 +7,6 @@ import { useViewTransition } from "@/hooks/useViewTransition";
 
 gsap.registerPlugin(useGSAP);
 
-// Metadata export (will be used by parent layout)
-export const metadata = {
-  title: "Our Work - Portfolio | KARINITY & FOASH",
-  description:
-    "Explore our portfolio of creative projects including web design, mobile apps, and digital experiences. View case studies from our award-winning work at KARINITY & FOASH creative agency.",
-  keywords:
-    "portfolio, web design portfolio, creative work, case studies, design projects, branding work, app design examples, UI/UX portfolio",
-  openGraph: {
-    title: "Our Work - Creative Portfolio | KARINITY & FOASH",
-    description:
-      "Explore our portfolio of creative projects including web design, mobile apps, and digital experiences.",
-    images: ["/work/work_1_1.jpg"],
-  },
-};
-
 const Page = () => {
   const { navigateWithTransition } = useViewTransition();
 
