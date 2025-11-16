@@ -1,6 +1,8 @@
 import "./globals.css";
 import ClientLayout from "@/client-layout";
 import { ViewTransitions } from "next-view-transitions";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const siteUrl = "https://www.karinity-foash.com"; // Update with your actual domain
 const siteName = "KARINITY & FOASH";
@@ -277,6 +279,8 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body>
+        <SpeedInsights />
+        <Analytics />
         <ViewTransitions>
           <ClientLayout>{children}</ClientLayout>
         </ViewTransitions>
