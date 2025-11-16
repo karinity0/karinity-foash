@@ -5,7 +5,7 @@ nav {
   width: 100vw;
   padding: 2rem;
   color: var(--base-100);
-  z-index: 999;
+  z-index: 9999;
 }
 
 nav .nav-logo a {
@@ -44,7 +44,7 @@ nav .close-label {
   overflow: hidden;
   background-color: var(--base-400);
   color: var(--base-100);
-  z-index: 99;
+  z-index: 999;
   will-change: clip-path;
 }
 

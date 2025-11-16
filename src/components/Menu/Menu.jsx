@@ -463,21 +463,19 @@ const Menu = ({ pageRef }) => {
           onClick={() => {
             navigateWithTransition("/");
           }}
-          className="flex items-center justify-center gap-1 justify-self-start"
+          className="grid grid-cols-[1fr_auto_1fr] gap-2 sm:gap-3 md:gap-4 justify-self-start items-center w-40"
         >
           {/* KARINITY Logo with Animation */}
-          <div className="h-12 w-fit overflow-visible">
-            <LogoKarinity />
-          </div>
+          <LogoKarinity />
 
           {/* Separator */}
           <div
-            className="bg-white w-px h-8 self-center"
+            className="bg-white w-0.5 h-8 sm:h-10 md:h-12 lg:h-14 xl:h-16 justify-self-center self-center"
             style={{ marginBottom: "0px" }}
           />
 
           {/* FOASH Logo with Animation */}
-          <div className="h-12 w-fit overflow-visible">
+          <div className="h-8 sm:h-10 md:h-12 lg:h-14 xl:h-16 w-fit overflow-visible flex items-center">
             <LogoFoash />
           </div>
         </div>
@@ -567,7 +565,7 @@ const Menu = ({ pageRef }) => {
         </div>
 
         <div className="menu-links-wrapper" ref={menuLinksWrapperRef}>
-          {/* {menuItems.map((item, index) => (
+          {menuItems.map((item, index) => (
             <div
               key={item.label}
               className="menu-link"
@@ -599,7 +597,7 @@ const Menu = ({ pageRef }) => {
                 <span>{item.label}</span>
               </a>
             </div>
-          ))} */}
+          ))}
 
           <div className="link-highlighter" ref={linkHighlighterRef}></div>
         </div>

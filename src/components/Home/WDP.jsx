@@ -361,13 +361,13 @@ export const WDP = () => {
       ref={containerRef}
       className="relative flex items-center justify-center w-full px-2 sm:px-4 z-10"
     >
-      <div className="flex flex-wrap items-center justify-center relative z-10 text-center gap-10 xs:gap-20 sm:gap-20 md:gap-28 lg:gap-32 xl:gap-52">
+      <div className="flex flex-wrap items-center justify-center relative z-10 text-center gap-16 xs:gap-28 lg:gap-32 xl:gap-52">
         {/* W - Web Components */}
         <div className="relative inline-flex items-center justify-start min-w-fit">
           <div className="flex items-baseline gap-0">
             <h4
               data-letter="w"
-              className="cursor-pointer transition-all duration-300 relative z-20 hover:scale-110 text-4xl! md:text-5xl! lg:text-6xl! xl:text-7xl! 2xl:text-8xl! font-light opacity-80"
+              className="cursor-pointer transition-all duration-300 relative z-20 hover:scale-110 text-5xl! xs:text-6xl! xl:text-7xl! 2xl:text-8xl! font-light opacity-80"
               style={{
                 color: "inherit",
               }}
@@ -381,7 +381,7 @@ export const WDP = () => {
               className="absolute bottom-1 md:bottom-0 z-20 font-light opacity-80 hidden"
               style={{
                 color: "inherit",
-                fontSize: "clamp(0.625rem, 2vw, 1.5rem)",
+                fontSize: "clamp(1.2rem, 2vw, 1.5rem)",
                 left: "100%", // Position right after the letter
                 marginLeft: "2px",
                 whiteSpace: "nowrap", // Prevent wrapping
@@ -410,7 +410,7 @@ export const WDP = () => {
           <div className="flex items-baseline gap-0">
             <h4
               data-letter="m"
-              className="cursor-pointer transition-all duration-300 relative z-20 hover:scale-110 text-4xl! md:text-5xl! lg:text-6xl! xl:text-7xl! 2xl:text-8xl! font-light opacity-80"
+              className="cursor-pointer transition-all duration-300 relative z-20 hover:scale-110 text-5xl! xs:text-6xl! xl:text-7xl! 2xl:text-8xl! font-light opacity-80"
               style={{
                 color: "inherit",
               }}
@@ -424,7 +424,7 @@ export const WDP = () => {
               className="absolute bottom-1 md:bottom-0 z-20 font-light opacity-80 hidden"
               style={{
                 color: "inherit",
-                fontSize: "clamp(0.625rem, 2vw, 1.5rem)",
+                fontSize: "clamp(1.2rem, 2vw, 1.5rem)",
                 left: "100%", // Position right after the letter
                 marginLeft: "2px",
                 whiteSpace: "nowrap", // Prevent wrapping
@@ -453,7 +453,7 @@ export const WDP = () => {
           <div className="flex items-baseline gap-0">
             <h4
               data-letter="d"
-              className="cursor-pointer transition-all duration-300 relative z-20 hover:scale-110 text-4xl! md:text-5xl! lg:text-6xl! xl:text-7xl! 2xl:text-8xl! font-light opacity-80"
+              className="cursor-pointer transition-all duration-300 relative z-20 hover:scale-110 text-5xl! xs:text-6xl! xl:text-7xl! 2xl:text-8xl! font-light opacity-80"
               style={{
                 color: "inherit",
               }}
@@ -467,7 +467,7 @@ export const WDP = () => {
               className="absolute bottom-1 md:bottom-0 z-20 font-light opacity-80 hidden"
               style={{
                 color: "inherit",
-                fontSize: "clamp(0.625rem, 2vw, 1.5rem)",
+                fontSize: "clamp(1.2rem, 2vw, 1.5rem)",
                 left: "100%", // Position right after the letter
                 marginLeft: "2px",
                 whiteSpace: "nowrap", // Prevent wrapping
@@ -496,7 +496,7 @@ export const WDP = () => {
           <div className="flex items-baseline gap-0">
             <h4
               data-letter="p"
-              className="cursor-pointer transition-all duration-300 relative z-20 hover:scale-110 text-4xl! md:text-5xl! lg:text-6xl! xl:text-7xl! 2xl:text-8xl! font-light opacity-80"
+              className="cursor-pointer transition-all duration-300 relative z-20 hover:scale-110 text-5xl! xs:text-6xl! xl:text-7xl! 2xl:text-8xl! font-light opacity-80"
               style={{
                 color: "inherit",
               }}
@@ -510,7 +510,7 @@ export const WDP = () => {
               className="absolute bottom-1 md:bottom-0 z-20 font-light opacity-80 hidden"
               style={{
                 color: "inherit",
-                fontSize: "clamp(0.625rem, 2vw, 1.5rem)",
+                fontSize: "clamp(1.2rem, 2vw, 1.5rem)",
                 left: "100%", // Position right after the letter
                 marginLeft: "2px",
                 whiteSpace: "nowrap", // Prevent wrapping

@@ -35,13 +35,13 @@ const Page = () => {
 
   return (
     <>
-      <PreLoader />
+      {/* <PreLoader /> */}
 
       <section className="hero">
         <div className="container">
           <div className="hero-content-main">
             <div className="w-full h-full flex items-center justify-center px-3 sm:px-4 md:px-6 lg:px-8">
-              <div className="flex flex-col items-center justify-center relative w-full max-w-7xl h-auto min-h-[60vh] sm:min-h-[70vh] md:h-[80%] py-8 sm:py-12 md:py-0">
+              <div className="flex flex-col items-center justify-center relative w-full max-w-7xl h-auto min-h-[60vh] sm:min-h-[70vh] md:h-[80%] py-8 sm:py-12 md:py-0 select-none ">
                 {/* Main heading group */}
                 <Title />
 

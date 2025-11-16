@@ -243,11 +243,11 @@ export const Title = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center gap-2 xs:gap-3 sm:gap-4 md:gap-6 lg:gap-8 xl:gap-10 flex-1 w-full px-2 sm:px-4">
+    <div className="flex flex-col items-center justify-center gap-6 lg:gap-8 xl:gap-10 flex-1 w-full px-2 sm:px-4">
       <div className="flex items-center justify-center gap-2 xs:gap-3 sm:gap-4 md:gap-6 text-center w-full">
         <h2
           ref={helloRef}
-          className="text-5xl! md:text-6xl! lg:text-7xl! xl:text-8xl! inline-flex m-0 tracking-tight xs:tracking-normal cursor-pointer perspective-1000"
+          className="text-6xl! lg:text-7xl! xl:text-8xl! inline-flex m-0 tracking-tight xs:tracking-normal cursor-pointer perspective-1000"
           onMouseEnter={() => handleHelloHover(true)}
           onMouseLeave={() => handleHelloHover(false)}
           style={{
@@ -259,7 +259,7 @@ export const Title = () => {
         </h2>
         <h2
           ref={wereRef}
-          className="text-5xl! md:text-6xl! lg:text-7xl! xl:text-8xl! inline-flex m-0 tracking-tight xs:tracking-normal cursor-pointer perspective-1000"
+          className="text-6xl! lg:text-7xl! xl:text-8xl! inline-flex m-0 tracking-tight xs:tracking-normal cursor-pointer perspective-1000"
           onMouseEnter={() => handleHelloHover(true)}
           onMouseLeave={() => handleHelloHover(false)}
           style={{
@@ -272,7 +272,7 @@ export const Title = () => {
       </div>
 
       <div className="relative mt-2 xs:mt-3 sm:mt-4 md:mt-0 w-full max-w-full overflow-hidden flex items-center justify-center">
-        <p className="w-[80%] xs:w-fit md:w-fit text-base! md:text-lg! lg:text-xl! xl:text-2xl! font-medium tracking-[0.3em] md:tracking-[0.4em] lg:tracking-[0.5em] cursor-pointer grid lg:flex grid-rows-3 gap-2 sm:gap-3 md:gap-5 sm:whitespace-nowrap text-center">
+        <p className="w-[80%] xs:w-fit md:w-fit text-xl! xl:text-2xl! font-medium tracking-[0.3em] md:tracking-[0.4em] lg:tracking-[0.5em] cursor-pointer grid lg:flex grid-rows-3 gap-2 sm:gap-3 md:gap-5 sm:whitespace-nowrap text-center">
           <span className="inline-block justify-self-start">YOUR</span>
           <span
             ref={creativeRef}

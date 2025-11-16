@@ -17,6 +17,7 @@ const Spotlight = () => {
 
       const initSpotlight = () => {
         new SplitType(".marquee-text-item h1", { types: "chars" });
+        const isMobile = window.innerWidth < 1000;
 
         document
           .querySelectorAll(".marquee-container")

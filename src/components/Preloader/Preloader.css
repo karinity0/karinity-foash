@@ -9,23 +9,4 @@
   will-change: clip-path;
   overflow: hidden;
   z-index: 9999;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 13vw;
-}
-
-.preloader svg {
-  max-width: min(40vw, 500px);
-  max-height: min(40vh, 200px);
-  width: auto;
-  height: auto;
-}
-
-.preloader svg#foash-logo {
-  align-self: center;
-}
-
-.preloader svg#karinity-logo {
-  align-self: center;
 }
