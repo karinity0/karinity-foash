@@ -221,7 +221,7 @@ const Footer = () => {
         <div className="footer-byline">
           <div className="footer-time">
             <p className="gap-x-2! text-sm!">
-              Egypt, Cairo <span>{egyptTime}</span>
+              Egypt, El Mahalla El Kubra <span>{egyptTime}</span>
             </p>
           </div>
 

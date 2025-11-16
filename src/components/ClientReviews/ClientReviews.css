@@ -27,30 +27,26 @@
 }
 
 .client-reviews #review-card-1 {
-  background-color: var(--base-200);
-}
-
-.client-reviews #review-card-2 {
-  background-color: var(--base-400);
-  color: var(--base-100);
-}
-
-.client-reviews #review-card-3 {
   background-color: var(--accent-1);
   color: var(--base-100);
 }
 
+.client-reviews #review-card-2 {
+  background-color: var(--accent-5);
+  color: var(--base-100);
+}
+
+.client-reviews #review-card-3 {
+  background-color: var(--accent-4);
+  color: var(--base-100);
+}
+
 .client-reviews #review-card-4 {
-  background-color: var(--base-400);
-  color: var(--base-300);
+  background-color: var(--accent-2);
+  color: var(--base-100);
 }
 
 .client-reviews #review-card-5 {
-  background-color: var(--base-200);
-  color: var(--base-400);
-}
-
-.client-reviews #review-card-6 {
   background-color: var(--base-500);
   color: var(--base-100);
 }

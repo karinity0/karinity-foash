@@ -35,9 +35,8 @@ const Menu = ({ pageRef }) => {
 
   const menuItems = [
     { label: "Home", route: "/" },
-    { label: "Work", route: "/work" },
-    { label: "Studio", route: "/studio" },
-    { label: "Stories", route: "/stories" },
+    { label: "Projects", route: "/projects" },
+    { label: "Services", route: "/services" },
     { label: "Contact", route: "/contact" },
   ];
 
@@ -507,7 +506,7 @@ const Menu = ({ pageRef }) => {
           >
             <div className="menu-content-group">
               <p>&copy; KARINITY</p>
-              <p>Cairo</p>
+              <p>El Mahalla El Kubra</p>
               <p>Egypt</p>
             </div>
 
@@ -554,7 +553,7 @@ const Menu = ({ pageRef }) => {
 
             <div className="menu-content-group">
               <p>Credits</p>
-              <p>Made by Karinity &copy;</p>
+              <p>Made by &copy; Karinity</p>
               <p>NOV. 2025</p>
             </div>
           </div>

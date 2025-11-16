@@ -74,24 +74,57 @@ const ShowWeb = () => {
       });
 
       mm.add("(max-width: 999px)", () => {
-        const showreelSection = showreelSecRef.current;
-        if (showreelSection) {
-          gsap.set(showreelSection, { clearProps: "all" });
-        }
-        gsap.set(".showreel-container", { clearProps: "all" });
+        const scrollTriggerInstances = [];
 
-        ScrollTrigger.refresh();
+        const frameTimeline = gsap.timeline({ repeat: -1 });
+
+        for (let i = 1; i <= totalFrames; i++) {
+          frameTimeline.add(() => {
+            setCurrentFrame(i);
+          }, (i - 1) * (frameInterval / 1000));
+        }
+
+        const scrollTrigger = ScrollTrigger.create({
+          trigger: showreelSecRef.current,
+          start: "top top",
+          end: () => `+=${window.innerHeight * 0.5}px`,
+          pin: true,
+          pinSpacing: true,
+          onUpdate: (self) => {
+            const progress = self.progress;
+
+            const scaleValue = gsap.utils.mapRange(0, 1, 0.75, 1, progress);
+            const borderRadiusValue =
+              progress <= 0.5 ? gsap.utils.mapRange(0, 0.5, 2, 0, progress) : 0;
+
+            gsap.set(".showreel-container", {
+              scale: scaleValue,
+              borderRadius: `${borderRadiusValue}rem`,
+            });
+          },
+        });
+
+        if (scrollTrigger) {
+          scrollTriggerInstances.push(scrollTrigger);
+        }
 
         const refreshHandler = () => {
           ScrollTrigger.refresh();
         };
 
         window.addEventListener("orientationchange", refreshHandler);
+        window.addEventListener("resize", refreshHandler);
+
         const onLoad = () => ScrollTrigger.refresh();
         window.addEventListener("load", onLoad, { passive: true });
 
         return () => {
+          frameTimeline.kill();
+
+          scrollTriggerInstances.forEach((trigger) => trigger.kill());
+
           window.removeEventListener("orientationchange", refreshHandler);
+          window.removeEventListener("resize", refreshHandler);
           window.removeEventListener("load", onLoad);
         };
       });

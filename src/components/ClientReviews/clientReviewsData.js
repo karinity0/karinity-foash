@@ -13,12 +13,6 @@ export const clientReviewsData = [
   },
   {
     review:
-      "Their sense of timing and motion design is ridiculous in the best way. It’s like everything they touch ends up looking intentional, alive, and a little bit unpredictable.",
-    clientName: "Kenji Mori",
-    clientCompany: "Framefield",
-  },
-  {
-    review:
       "We came to them for a quick rebrand and left with a full-on visual identity system. It’s rare to find a team that mixes that level of craft with this much curiosity.",
     clientName: "Amara Singh",
     clientCompany: "Lumenwave",
