@@ -35,7 +35,7 @@ const Page = () => {
 
   return (
     <>
-      {/* <PreLoader /> */}
+      <PreLoader />
 
       <section className="hero">
         <div className="container">
