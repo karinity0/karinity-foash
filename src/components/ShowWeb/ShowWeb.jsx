@@ -1,31 +1,17 @@
 "use client";
-import "./Showreel.css";
+import "./ShowWeb.css";
 import React, { useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import { LuVolumeX, LuVolume } from "react-icons/lu";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
-const Showreel = () => {
+const ShowWeb = () => {
   const showreelSecRef = useRef(null);
-  const audioRef = useRef(null);
   const [currentFrame, setCurrentFrame] = useState(1);
-  const [isMuted, setIsMuted] = useState(true);
   const totalFrames = 7;
-  const frameInterval = 500;
-
-  const toggleMute = () => {
-    if (audioRef.current) {
-      audioRef.current.muted = !audioRef.current.muted;
-      setIsMuted(!isMuted);
-
-      if (!audioRef.current.muted && audioRef.current.paused) {
-        audioRef.current.play();
-      }
-    }
-  };
+  const frameInterval = 1500;
 
   useGSAP(
     () => {
@@ -40,10 +26,6 @@ const Showreel = () => {
           frameTimeline.add(() => {
             setCurrentFrame(i);
           }, (i - 1) * (frameInterval / 1000));
-        }
-
-        if (audioRef.current) {
-          audioRef.current.play().catch((error) => {});
         }
 
         const scrollTrigger = ScrollTrigger.create({
@@ -128,24 +110,10 @@ const Showreel = () => {
           src={`/showreel/showreel-frame-${currentFrame}.jpg`}
           alt="Showreel frame"
         />
+        <div className="web-text">WEB</div>
       </div>
-
-      <div className="volume-icon" onClick={toggleMute}>
-        {isMuted ? (
-          <LuVolumeX color="#171412" size={25} />
-        ) : (
-          <LuVolume color="#171412" size={25} />
-        )}
-      </div>
-
-      <audio
-        ref={audioRef}
-        src="/showreel/showreel_music.mp3"
-        loop
-        muted={isMuted}
-      />
     </section>
   );
 };
 
-export default Showreel;
+export default ShowWeb;

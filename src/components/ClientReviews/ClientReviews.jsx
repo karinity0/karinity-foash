@@ -1,7 +1,7 @@
 "use client";
 import "./ClientReviews.css";
 import { clientReviewsData } from "./clientReviewsData.js";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
@@ -10,6 +10,18 @@ gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 const ClientReviews = () => {
   const clientReviewsContainerRef = useRef(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1000);
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   useGSAP(
     () => {
@@ -105,9 +117,13 @@ const ClientReviews = () => {
     { scope: clientReviewsContainerRef }
   );
 
+  const reviewsToShow = isMobile
+    ? clientReviewsData.slice(0, 2)
+    : clientReviewsData;
+
   return (
     <div className="client-reviews" ref={clientReviewsContainerRef}>
-      {clientReviewsData.map((item, index) => (
+      {reviewsToShow.map((item, index) => (
         <div className="review-card" key={index}>
           <div
             className="review-card-container"

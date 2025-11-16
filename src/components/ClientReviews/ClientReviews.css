@@ -41,15 +41,17 @@
 }
 
 .client-reviews #review-card-4 {
-  background-color: var(--base-200);
+  background-color: var(--base-400);
+  color: var(--base-300);
 }
 
 .client-reviews #review-card-5 {
-  background-color: var(--base-500);
+  background-color: var(--base-200);
+  color: var(--base-400);
 }
 
 .client-reviews #review-card-6 {
-  background-color: var(--base-400);
+  background-color: var(--base-500);
   color: var(--base-100);
 }
 
@@ -79,6 +81,10 @@
 }
 
 @media (max-width: 1000px) {
+  .client-reviews {
+    margin-bottom: 3rem;
+  }
+
   .client-reviews .review-card-container {
     flex-direction: column;
     gap: 0;

@@ -75,6 +75,6 @@
 
 @media screen and (max-width: 1000px) {
   .spotlight .marquee-img-item h1 {
-    font-size: 2rem;
+    font-size: 1.5rem;
   }
 }

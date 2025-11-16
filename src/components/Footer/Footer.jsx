@@ -12,7 +12,7 @@ gsap.registerPlugin(useGSAP);
 const Footer = () => {
   const footerRef = useRef(null);
   const explosionContainerRef = useRef(null);
-  const [torontoTime, setTorontoTime] = useState("");
+  const [egyptTime, setEgyptTime] = useState("");
 
   const config = {
     gravity: 0.25,
@@ -24,29 +24,29 @@ const Footer = () => {
     resetDelay: 500,
   };
 
-  const imageParticleCount = 10;
+  const imageParticleCount = 7;
   const imagePaths = Array.from(
     { length: imageParticleCount },
-    (_, i) => `/objects/obj-${i + 1}.png`
+    (_, i) => `/objects/obj-${i + 8}.png`
   );
 
   useEffect(() => {
-    const updateTorontoTime = () => {
+    const updateEgyptTime = () => {
       const options = {
-        timeZone: "America/Toronto",
+        timeZone: "Africa/Cairo",
         hour: "2-digit",
         minute: "2-digit",
         second: "2-digit",
-        hour12: false,
+        hour12: true,
       };
 
       const formatter = new Intl.DateTimeFormat("en-US", options);
-      const torontoTimeString = formatter.format(new Date());
-      setTorontoTime(torontoTimeString);
+      const egyptTimeString = formatter.format(new Date());
+      setEgyptTime(egyptTimeString);
     };
 
-    updateTorontoTime();
-    const timeInterval = setInterval(updateTorontoTime, 1000);
+    updateEgyptTime();
+    const timeInterval = setInterval(updateEgyptTime, 1000);
 
     return () => clearInterval(timeInterval);
   }, []);
@@ -220,17 +220,17 @@ const Footer = () => {
         </div>
         <div className="footer-byline">
           <div className="footer-time">
-            <p>
-              Toronto, ON <span>{torontoTime}</span>
+            <p className="gap-x-2! text-sm!">
+              Egypt, Cairo <span>{egyptTime}</span>
             </p>
           </div>
 
           <div className="footer-author">
-            <p>Developed by Codegrid</p>
+            <p>Developed by Karinity &copy;</p>
           </div>
 
           <div className="footer-copyright">
-            <p>&copy; Polite Chaos</p>
+            <p>KARINITY & FOASH</p>
           </div>
         </div>
       </div>
