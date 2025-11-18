@@ -6,12 +6,18 @@ import { useGSAP } from "@gsap/react";
 import Button from "../Button/Button";
 import { IoMail } from "react-icons/io5";
 import Copy from "../Copy/Copy";
+import { SplitText } from "gsap/SplitText";
 
-gsap.registerPlugin(useGSAP);
+gsap.registerPlugin(useGSAP, SplitText);
 
 const Footer = () => {
   const footerRef = useRef<HTMLElement>(null);
   const explosionContainerRef = useRef<HTMLDivElement>(null);
+  const profileImagesContainerRef = useRef<HTMLDivElement>(null);
+  const profileImagesRef = useRef<HTMLDivElement[]>([]);
+  const nameElementsRef = useRef<HTMLDivElement[]>([]);
+  const nameHeadingsRef = useRef<HTMLHeadingElement[]>([]);
+  const defaultLettersRef = useRef<Element[]>([]);
   const [egyptTime, setEgyptTime] = useState("");
 
   const config = {
@@ -205,13 +211,162 @@ const Footer = () => {
     { scope: footerRef }
   );
 
+  useGSAP(() => {
+    const profileImagesContainer =
+      profileImagesContainerRef.current as HTMLDivElement;
+    if (!profileImagesContainer) return;
+
+    const profileImages = Array.from(
+      profileImagesContainer.querySelectorAll<HTMLDivElement>(".img")
+    );
+    const nameElements = Array.from(
+      document.querySelectorAll<HTMLDivElement>(".profile-names .name")
+    );
+    const nameHeadings = Array.from(
+      document.querySelectorAll<HTMLHeadingElement>(".profile-names .name h1")
+    );
+
+    // Store refs
+    profileImagesRef.current = profileImages;
+    nameElementsRef.current = nameElements;
+    nameHeadingsRef.current = nameHeadings;
+
+    // Split text into characters
+    nameHeadings.forEach((heading) => {
+      const split = new SplitText(heading, { type: "chars" });
+      split.chars.forEach((char) => {
+        char.classList.add("letter");
+      });
+    });
+
+    const defaultLetters =
+      nameElements[0]?.querySelectorAll<HTMLElement>(".letter") || [];
+    defaultLettersRef.current = Array.from(defaultLetters);
+    gsap.set(defaultLettersRef.current as gsap.TweenTarget, { y: "100%" });
+
+    const handleResize = () => {
+      if (window.innerWidth >= 900) {
+        setupDesktopInteractions();
+      }
+    };
+
+    const setupDesktopInteractions = () => {
+      profileImages.forEach((img, index) => {
+        const correspondingName = nameElements[index + 1];
+        if (!correspondingName) return;
+
+        const letters =
+          correspondingName.querySelectorAll<HTMLElement>(".letter");
+
+        const handleMouseEnter = () => {
+          gsap.to(img as gsap.TweenTarget, {
+            width: 150,
+            height: 150,
+            duration: 0.5,
+            ease: "power4.out",
+          });
+
+          gsap.to(Array.from(letters) as gsap.TweenTarget, {
+            y: "-100%",
+            ease: "power4.out",
+            duration: 0.75,
+            stagger: {
+              each: 0.025,
+              from: "center",
+            },
+          });
+        };
+
+        const handleMouseLeave = () => {
+          gsap.to(img as gsap.TweenTarget, {
+            width: 70,
+            height: 70,
+            duration: 0.5,
+            ease: "power4.out",
+          });
+
+          gsap.to(Array.from(letters) as gsap.TweenTarget, {
+            y: "0%",
+            ease: "power4.out",
+            duration: 0.75,
+            stagger: {
+              each: 0.025,
+              from: "center",
+            },
+          });
+        };
+
+        img.addEventListener("mouseenter", handleMouseEnter);
+        img.addEventListener("mouseleave", handleMouseLeave);
+
+        // Store cleanup function
+        (img as any)._cleanup = () => {
+          img.removeEventListener("mouseenter", handleMouseEnter);
+          img.removeEventListener("mouseleave", handleMouseLeave);
+        };
+      });
+
+      const handleContainerMouseEnter = () => {
+        gsap.to(defaultLettersRef.current as gsap.TweenTarget, {
+          y: "-20%",
+          ease: "power4.out",
+          duration: 0.75,
+          stagger: {
+            each: 0.025,
+            from: "center",
+          },
+        });
+      };
+
+      const handleContainerMouseLeave = () => {
+        gsap.to(defaultLettersRef.current as gsap.TweenTarget, {
+          y: "100%",
+          ease: "power4.out",
+          duration: 0.75,
+          stagger: {
+            each: 0.025,
+            from: "center",
+          },
+        });
+      };
+
+      profileImagesContainer.addEventListener(
+        "mouseenter",
+        handleContainerMouseEnter
+      );
+      profileImagesContainer.addEventListener(
+        "mouseleave",
+        handleContainerMouseLeave
+      );
+
+      // Store cleanup function
+      (profileImagesContainer as any)._cleanup = () => {
+        profileImagesContainer.removeEventListener(
+          "mouseenter",
+          handleContainerMouseEnter
+        );
+        profileImagesContainer.removeEventListener(
+          "mouseleave",
+          handleContainerMouseLeave
+        );
+      };
+    };
+
+    // Setup interactions if window is wide enough
+    if (window.innerWidth >= 900) {
+      setupDesktopInteractions();
+    }
+
+    window.addEventListener("resize", handleResize);
+  });
+
   return (
     <footer ref={footerRef}>
       <div className="container">
-        <div className="footer-header-content">
+        <div className="footer-header-content relative">
           <div className="footer-header">
             <Copy animateOnScroll={true} delay={0.2}>
-              <h1>Let's build something that feels alive</h1>
+              <h2>Let's build something that feels alive</h2>
             </Copy>
           </div>
           <div className="footer-link">
@@ -225,7 +380,31 @@ const Footer = () => {
               Say Hello
             </Button>
           </div>
+
+          <section className="team">
+            <div className="profile-images" ref={profileImagesContainerRef}>
+              <div className="img">
+                <img src="/team-cards/team-member-2.jpg" alt="" />
+              </div>
+              <div className="img">
+                <img src="/team-cards/team-member-4.jpg" alt="" />
+              </div>
+            </div>
+
+            <div className="profile-names">
+              <div className="name default">
+                <h1>The Squad</h1>
+              </div>
+              <div className="name">
+                <h1>Karim</h1>
+              </div>
+              <div className="name">
+                <h1>Foash</h1>
+              </div>
+            </div>
+          </section>
         </div>
+
         <div className="footer-byline">
           <div className="footer-time">
             <p className="gap-x-2! text-sm!">

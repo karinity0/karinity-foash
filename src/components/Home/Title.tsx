@@ -11,6 +11,7 @@ export const Title = () => {
   const [isHovered, setIsHovered] = useState(false);
   const timelineRef = useRef<gsap.core.Timeline | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
+  const hasAutoHoveredRef = useRef(false);
 
   // Text to animate
   const text1 = "CREATIVE";
@@ -41,7 +42,23 @@ export const Title = () => {
 
       // Create staggered animation
       const tl = gsap.timeline({
-        onComplete: () => setIsLoaded(true),
+        onComplete: () => {
+          setIsLoaded(true);
+          // Auto-trigger hover effect once after initial animation completes
+          if (!hasAutoHoveredRef.current && creativeRef.current) {
+            hasAutoHoveredRef.current = true;
+            // Wait a bit then trigger hover effect
+            setTimeout(() => {
+              setIsHovered(true);
+              // After hover animation completes, reset to normal
+              // "CREATIVE" has 8 letters: last delay (7*0.08=0.56s) + object delay (0.15s) + object duration (0.5s) ≈ 1.2s
+              // Add extra time to let users see the effect
+              setTimeout(() => {
+                setIsHovered(false);
+              }, 1800);
+            }, 500);
+          }
+        },
       });
 
       // Animate HELLO

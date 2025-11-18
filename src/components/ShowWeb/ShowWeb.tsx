@@ -137,7 +137,7 @@ const ShowWeb = () => {
   );
 
   return (
-    <section className="showreel" ref={showreelSecRef}>
+    <section className="showreel z-20!" ref={showreelSecRef}>
       <div className="showreel-container">
         <img
           src={`/showreel/showreel-frame-${currentFrame}.jpg`}

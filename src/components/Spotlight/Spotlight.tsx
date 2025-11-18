@@ -23,7 +23,9 @@ const Spotlight = () => {
           .querySelectorAll(".marquee-container")
           .forEach((container, index) => {
             const marquee = container.querySelector(".marquee") as HTMLElement;
-            const chars = container.querySelectorAll(".char") as NodeListOf<HTMLElement>;
+            const chars = container.querySelectorAll(
+              ".char"
+            ) as NodeListOf<HTMLElement>;
 
             const marqueeTrigger = gsap.to(marquee, {
               x: index % 2 === 0 ? "5%" : "-15%",
@@ -91,7 +93,7 @@ const Spotlight = () => {
   );
 
   return (
-    <section className="spotlight" ref={spotlightRef}>
+    <section className="spotlight z-50!" ref={spotlightRef}>
       <div className="marquees">
         <div className="marquee-container" id="marquee-1">
           <div className="marquee">
@@ -178,4 +180,3 @@ const Spotlight = () => {
 };
 
 export default Spotlight;
-

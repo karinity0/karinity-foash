@@ -15,7 +15,9 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import gsap from "gsap";
 import { WDP } from "@/components/Home/WDP";
 import { Title } from "@/components/Home/Title";
-import WebWork from "@/components/Home/WebWork";
+import MouseReveal from "@/components/MouseReveal/MouseReveal";
+import WebTech from "@/components/Home/WebTech";
+import WebProject from "@/components/Home/WebProject";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -116,18 +118,20 @@ const Page = () => {
 
       <Spotlight />
 
-      <ShowWeb />
+      {/* <ShowWeb /> */}
 
-      <WebWork />
+      <WebTech />
+
+      <WebProject />
 
       {/* <CTACard /> */}
 
-      <section className="client-reviews-header-container">
+      {/* <section className="client-reviews-header-container">
         <div className="container">
           <div className="client-reviews-header-content">
             <div className="client-reviews-header">
               <Copy animateOnScroll={true} delay={0.25}>
-                <h2 className="w-full text-center flex items-center justify-center text-8xl!">
+                <h2 className="w-full text-center flex items-center justify-center text-7xl!">
                   People Approved
                 </h2>
               </Copy>
@@ -157,7 +161,7 @@ const Page = () => {
         </div>
       </section>
 
-      <ClientReviews />
+      <ClientReviews /> */}
 
       <Footer />
     </>

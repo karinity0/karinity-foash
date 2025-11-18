@@ -110,3 +110,99 @@ footer .footer-byline p {
     padding: 1.25rem;
   }
 }
+
+/* Team Members */
+
+.team {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  color: #e3e3db;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4.5em;
+  overflow: hidden;
+  z-index: 2;
+}
+
+.profile-images {
+  width: max-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.img {
+  position: relative;
+  width: 70px;
+  height: 70px;
+  padding: 5px;
+  cursor: pointer;
+  will-change: width, height;
+}
+
+.img img {
+  border-radius: 0.5rem;
+}
+
+.profile-names {
+  width: 100%;
+  height: 8.5rem;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+  overflow: hidden;
+}
+
+.name h1 {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  text-transform: uppercase;
+  font-family: "Big Shoulders Display";
+  font-size: 8rem;
+  font-weight: 900;
+  letter-spacing: -0.2rem;
+  line-height: 1;
+  color: var(--accent-4);
+  user-select: none;
+  transform: translateY(100%);
+}
+
+.name.default h1 {
+  color: #e3e3db;
+  transform: translateY(-100%);
+}
+
+.name h1 .letter {
+  position: relative;
+  transform: translateY(0%);
+  will-change: transform;
+}
+
+@media screen and (max-width: 900px) {
+  .team {
+    flex-direction: column-reverse;
+  }
+
+  .profile-images {
+    flex-wrap: wrap;
+    max-width: 90%;
+    justify-content: center;
+  }
+
+  .img {
+    width: 60px;
+    height: 60px;
+    padding: 2.5px;
+  }
+
+  .profile-names {
+    height: 4rem;
+  }
+
+  .name h1 {
+    font-size: 4rem;
+    letter-spacing: 0;
+  }
+}

@@ -63,7 +63,9 @@ export default function PreLoader() {
       );
 
       // Get pac-man group (second inner group) and the final path
-      const pacmanGroup = mainGroup?.querySelector("g:nth-of-type(2)") as SVGGElement | null;
+      const pacmanGroup = mainGroup?.querySelector(
+        "g:nth-of-type(2)"
+      ) as SVGGElement | null;
 
       if (!letters.length || !pacmanGroup) return;
 
@@ -94,7 +96,10 @@ export default function PreLoader() {
       ];
 
       // Function to create and animate crumbs
-      const createCrumbs = (letterElement: SVGPathElement | SVGPolygonElement, letterBounds: LetterPosition) => {
+      const createCrumbs = (
+        letterElement: SVGPathElement | SVGPolygonElement,
+        letterBounds: LetterPosition
+      ) => {
         const numCrumbs = gsap.utils.random(2, 5, 1); // 5-10 crumbs per letter
         const crumbs: SVGTextElement[] = [];
 
@@ -557,4 +562,3 @@ export default function PreLoader() {
     </div>
   );
 }
-
