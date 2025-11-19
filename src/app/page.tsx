@@ -39,7 +39,7 @@ const Page = () => {
 
   return (
     <div className="overflow-x-hidden w-full max-w-[100vw]">
-      {/* <PreLoader /> */}
+      <PreLoader />
 
       <section className="hero overflow-x-hidden">
         <div className="container">
