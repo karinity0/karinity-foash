@@ -244,10 +244,281 @@ const Footer = () => {
     defaultLettersRef.current = Array.from(defaultLetters);
     gsap.set(defaultLettersRef.current as gsap.TweenTarget, { y: "100%" });
 
+    const isMobile = () => window.innerWidth < 900;
+
     const handleResize = () => {
-      if (window.innerWidth >= 900) {
+      // Cleanup existing handlers
+      profileImages.forEach((img) => {
+        if ((img as any)._cleanup) {
+          (img as any)._cleanup();
+          delete (img as any)._cleanup;
+        }
+      });
+      if ((profileImagesContainer as any)._cleanup) {
+        (profileImagesContainer as any)._cleanup();
+        delete (profileImagesContainer as any)._cleanup;
+      }
+
+      if (isMobile()) {
+        setupMobileInteractions();
+      } else {
         setupDesktopInteractions();
       }
+    };
+
+    const setupMobileInteractions = () => {
+      let activeIndex: number | null = null;
+      let touchHandled = false;
+
+      profileImages.forEach((img, index) => {
+        const correspondingName = nameElements[index + 1];
+        if (!correspondingName) return;
+
+        const letters =
+          correspondingName.querySelectorAll<HTMLElement>(".letter");
+
+        const handleTouchStart = (e: TouchEvent) => {
+          e.preventDefault();
+          touchHandled = true;
+          activeIndex = index;
+
+          gsap.to(img as gsap.TweenTarget, {
+            width: 150,
+            height: 150,
+            duration: 0.5,
+            ease: "power4.out",
+          });
+
+          gsap.to(Array.from(letters) as gsap.TweenTarget, {
+            y: "-100%",
+            ease: "power4.out",
+            duration: 0.75,
+            stagger: {
+              each: 0.025,
+              from: "center",
+            },
+          });
+        };
+
+        const handleTouchEnd = (e: TouchEvent) => {
+          e.preventDefault();
+
+          // Reset all images and names
+          profileImages.forEach((resetImg, resetIndex) => {
+            const resetName = nameElements[resetIndex + 1];
+            if (!resetName) return;
+            const resetLetters =
+              resetName.querySelectorAll<HTMLElement>(".letter");
+
+            gsap.to(resetImg as gsap.TweenTarget, {
+              width: 60,
+              height: 60,
+              duration: 0.5,
+              ease: "power4.out",
+            });
+
+            gsap.to(Array.from(resetLetters) as gsap.TweenTarget, {
+              y: "0%",
+              ease: "power4.out",
+              duration: 0.75,
+              stagger: {
+                each: 0.025,
+                from: "center",
+              },
+            });
+          });
+
+          activeIndex = null;
+          setTimeout(() => {
+            touchHandled = false;
+          }, 300);
+        };
+
+        const handleClick = (e: MouseEvent) => {
+          // Prevent click if touch was just handled
+          if (touchHandled) {
+            e.preventDefault();
+            return;
+          }
+
+          if (activeIndex === index) {
+            // If already active, reset
+            profileImages.forEach((resetImg, resetIndex) => {
+              const resetName = nameElements[resetIndex + 1];
+              if (!resetName) return;
+              const resetLetters =
+                resetName.querySelectorAll<HTMLElement>(".letter");
+
+              gsap.to(resetImg as gsap.TweenTarget, {
+                width: 60,
+                height: 60,
+                duration: 0.5,
+                ease: "power4.out",
+              });
+
+              gsap.to(Array.from(resetLetters) as gsap.TweenTarget, {
+                y: "0%",
+                ease: "power4.out",
+                duration: 0.75,
+                stagger: {
+                  each: 0.025,
+                  from: "center",
+                },
+              });
+            });
+            activeIndex = null;
+            return;
+          }
+
+          activeIndex = index;
+
+          // Reset other images first
+          profileImages.forEach((resetImg, resetIndex) => {
+            if (resetIndex === index) return;
+            const resetName = nameElements[resetIndex + 1];
+            if (!resetName) return;
+            const resetLetters =
+              resetName.querySelectorAll<HTMLElement>(".letter");
+
+            gsap.to(resetImg as gsap.TweenTarget, {
+              width: 60,
+              height: 60,
+              duration: 0.5,
+              ease: "power4.out",
+            });
+
+            gsap.to(Array.from(resetLetters) as gsap.TweenTarget, {
+              y: "0%",
+              ease: "power4.out",
+              duration: 0.75,
+              stagger: {
+                each: 0.025,
+                from: "center",
+              },
+            });
+          });
+
+          gsap.to(img as gsap.TweenTarget, {
+            width: 150,
+            height: 150,
+            duration: 0.5,
+            ease: "power4.out",
+          });
+
+          gsap.to(Array.from(letters) as gsap.TweenTarget, {
+            y: "-100%",
+            ease: "power4.out",
+            duration: 0.75,
+            stagger: {
+              each: 0.025,
+              from: "center",
+            },
+          });
+        };
+
+        img.addEventListener("touchstart", handleTouchStart, {
+          passive: false,
+        });
+        img.addEventListener("touchend", handleTouchEnd, { passive: false });
+        img.addEventListener("click", handleClick);
+
+        // Store cleanup function
+        (img as any)._cleanup = () => {
+          img.removeEventListener("touchstart", handleTouchStart);
+          img.removeEventListener("touchend", handleTouchEnd);
+          img.removeEventListener("click", handleClick);
+        };
+      });
+
+      let containerTouchHandled = false;
+
+      const handleContainerTouchStart = (e: TouchEvent) => {
+        e.preventDefault();
+        containerTouchHandled = true;
+        gsap.to(defaultLettersRef.current as gsap.TweenTarget, {
+          y: "-20%",
+          ease: "power4.out",
+          duration: 0.75,
+          stagger: {
+            each: 0.025,
+            from: "center",
+          },
+        });
+      };
+
+      const handleContainerTouchEnd = (e: TouchEvent) => {
+        e.preventDefault();
+        gsap.to(defaultLettersRef.current as gsap.TweenTarget, {
+          y: "100%",
+          ease: "power4.out",
+          duration: 0.75,
+          stagger: {
+            each: 0.025,
+            from: "center",
+          },
+        });
+        setTimeout(() => {
+          containerTouchHandled = false;
+        }, 300);
+      };
+
+      const handleContainerClick = (e: MouseEvent) => {
+        // Prevent click if touch was just handled
+        if (containerTouchHandled) {
+          e.preventDefault();
+          return;
+        }
+
+        gsap.to(defaultLettersRef.current as gsap.TweenTarget, {
+          y: "-20%",
+          ease: "power4.out",
+          duration: 0.75,
+          stagger: {
+            each: 0.025,
+            from: "center",
+          },
+        });
+
+        setTimeout(() => {
+          gsap.to(defaultLettersRef.current as gsap.TweenTarget, {
+            y: "100%",
+            ease: "power4.out",
+            duration: 0.75,
+            stagger: {
+              each: 0.025,
+              from: "center",
+            },
+          });
+        }, 2000);
+      };
+
+      profileImagesContainer.addEventListener(
+        "touchstart",
+        handleContainerTouchStart,
+        { passive: false }
+      );
+      profileImagesContainer.addEventListener(
+        "touchend",
+        handleContainerTouchEnd,
+        { passive: false }
+      );
+      profileImagesContainer.addEventListener("click", handleContainerClick);
+
+      // Store cleanup function
+      (profileImagesContainer as any)._cleanup = () => {
+        profileImagesContainer.removeEventListener(
+          "touchstart",
+          handleContainerTouchStart
+        );
+        profileImagesContainer.removeEventListener(
+          "touchend",
+          handleContainerTouchEnd
+        );
+        profileImagesContainer.removeEventListener(
+          "click",
+          handleContainerClick
+        );
+      };
     };
 
     const setupDesktopInteractions = () => {
@@ -352,12 +623,27 @@ const Footer = () => {
       };
     };
 
-    // Setup interactions if window is wide enough
-    if (window.innerWidth >= 900) {
+    // Setup interactions based on screen size
+    if (isMobile()) {
+      setupMobileInteractions();
+    } else {
       setupDesktopInteractions();
     }
 
     window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      // Cleanup handlers
+      profileImages.forEach((img) => {
+        if ((img as any)._cleanup) {
+          (img as any)._cleanup();
+        }
+      });
+      if ((profileImagesContainer as any)._cleanup) {
+        (profileImagesContainer as any)._cleanup();
+      }
+    };
   });
 
   return (

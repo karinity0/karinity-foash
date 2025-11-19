@@ -1,10 +1,12 @@
 footer {
   position: relative;
-  width: 100vw;
+  width: 100%;
+  max-width: 100vw;
   height: 100.5svh;
   background-color: var(--base-400);
   color: var(--base-100);
   padding: 2rem;
+  overflow-x: hidden;
 }
 
 footer .explosion-container {
@@ -182,7 +184,7 @@ footer .footer-byline p {
 
 @media screen and (max-width: 900px) {
   .team {
-    flex-direction: column-reverse;
+    flex-direction: column;
   }
 
   .profile-images {

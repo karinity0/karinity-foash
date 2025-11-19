@@ -18,6 +18,7 @@ import { Title } from "@/components/Home/Title";
 import MouseReveal from "@/components/MouseReveal/MouseReveal";
 import WebTech from "@/components/Home/WebTech";
 import WebProject from "@/components/Home/WebProject";
+import DesignProjects from "@/components/Home/DesignProjects";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -37,10 +38,10 @@ const Page = () => {
   }, []);
 
   return (
-    <>
+    <div className="overflow-x-hidden w-full max-w-[100vw]">
       {/* <PreLoader /> */}
 
-      <section className="hero">
+      <section className="hero overflow-x-hidden">
         <div className="container">
           <div className="hero-content-main">
             <div className="w-full h-full flex items-center justify-center px-3 sm:px-4 md:px-6 lg:px-8">
@@ -124,6 +125,9 @@ const Page = () => {
 
       <WebProject />
 
+      {/* Design */}
+      <DesignProjects />
+
       {/* <CTACard /> */}
 
       {/* <section className="client-reviews-header-container">
@@ -164,7 +168,7 @@ const Page = () => {
       <ClientReviews /> */}
 
       <Footer />
-    </>
+    </div>
   );
 };
 

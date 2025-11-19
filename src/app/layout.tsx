@@ -273,14 +273,14 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   };
 
   return (
-    <html lang="en">
+    <html lang="en" className="overflow-x-hidden">
       <head>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body>
+      <body className="overflow-x-hidden">
         <SpeedInsights />
         <Analytics />
         <ViewTransitions>
@@ -290,4 +290,3 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     </html>
   );
 }
-

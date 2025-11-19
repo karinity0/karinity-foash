@@ -129,14 +129,14 @@ const WebProject = (props: Props) => {
 
   return (
     <div
-      className="w-full h-[170vh] relative bg-[#e46235] z-10!"
+      className="w-full max-w-[100vw] h-[170vh] relative bg-[#e46235] z-10! overflow-hidden"
       ref={containerRef}
     >
       <section
         className="absolute top-0 w-[400vw] h-screen will-change-transform select-none"
         ref={wrapperRef}
       >
-        <div className="flex items-center justify-center relative gap-5">
+        <div className="flex items-center justify-center relative gap-5 h-full">
           <h1 className="w-full! text-[48vw]! text-center! m-0! text-[#e3e3db]">
             Web Projects{" "}
           </h1>
@@ -183,7 +183,7 @@ const WebProject = (props: Props) => {
         </div>
 
         <div
-          className="absolute w-[300px] h-[300px] bg-gray-500 rounded-[20px] overflow-hidden top-1/2 left-[20%]"
+          className="absolute w-[150px] h-[150px] lg:w-[300px] lg:h-[300px] bg-gray-500 rounded-[20px] overflow-hidden top-1/2 left-[20%]"
           id="card-1"
         >
           <Link
@@ -197,7 +197,7 @@ const WebProject = (props: Props) => {
           </Link>
         </div>
         <div
-          className="absolute w-[300px] h-[300px] bg-gray-500 rounded-[20px] overflow-hidden top-[25%] left-[40%]"
+          className="absolute w-[150px] h-[150px] lg:w-[300px] lg:h-[300px] bg-gray-500 rounded-[20px] overflow-hidden top-[25%] left-[40%]"
           id="card-2"
         >
           <Link
@@ -211,7 +211,7 @@ const WebProject = (props: Props) => {
           </Link>
         </div>
         <div
-          className="absolute w-[300px] h-[300px] bg-gray-500 rounded-[20px] overflow-hidden top-[45%] left-[60%]"
+          className="absolute w-[150px] h-[150px] lg:w-[300px] lg:h-[300px] bg-gray-500 rounded-[20px] overflow-hidden top-[45%] left-[60%]"
           id="card-3"
         >
           <Link
@@ -225,7 +225,7 @@ const WebProject = (props: Props) => {
           </Link>
         </div>
         <div
-          className="absolute w-[300px] h-[300px] bg-gray-500 rounded-[20px] overflow-hidden top-[15%] left-[80%]"
+          className="absolute w-[150px] h-[150px] lg:w-[300px] lg:h-[300px] bg-gray-500 rounded-[20px] overflow-hidden top-[15%] left-[80%]"
           id="card-4"
         >
           <Link

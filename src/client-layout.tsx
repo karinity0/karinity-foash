@@ -22,31 +22,31 @@ export default function ClientLayout({ children }: { children: ReactNode }) {
 
   const scrollSettings = isMobile
     ? {
-        duration: 0.8,
+        duration: 1.5,
         easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
         direction: "vertical" as const,
         gestureDirection: "vertical" as const,
         smooth: true,
         smoothTouch: true,
-        touchMultiplier: 1.5,
+        touchMultiplier: 1,
         infinite: false,
-        lerp: 0.09,
-        wheelMultiplier: 1,
+        lerp: 0.05,
+        wheelMultiplier: 0.6,
         orientation: "vertical" as const,
         smoothWheel: true,
         syncTouch: true,
       }
     : {
-        duration: 1.2,
+        duration: 2.0, // Increased from 1.2
         easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
         direction: "vertical" as const,
         gestureDirection: "vertical" as const,
         smooth: true,
         smoothTouch: false,
-        touchMultiplier: 2,
+        touchMultiplier: 1.2, // Decreased from 2
         infinite: false,
-        lerp: 0.1,
-        wheelMultiplier: 1,
+        lerp: 0.05, // Decreased from 0.1
+        wheelMultiplier: 0.6, // Decreased from 1
         orientation: "vertical" as const,
         smoothWheel: true,
         syncTouch: true,
@@ -56,10 +56,9 @@ export default function ClientLayout({ children }: { children: ReactNode }) {
     <ReactLenis root options={scrollSettings}>
       <Menu pageRef={pageRef} />
 
-      <div className="" ref={pageRef}>
+      <div className="overflow-x-hidden w-full" ref={pageRef}>
         {children}
       </div>
     </ReactLenis>
   );
 }
-
