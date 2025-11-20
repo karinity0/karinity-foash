@@ -1,0 +1,262 @@
+.mobile-section {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background-color: #357eb1;
+  color: #fff;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 5%;
+}
+
+.mobile-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  max-width: 1400px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+/* Left Column: Phone */
+.mobile-col-left {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.phone-frame {
+  position: relative;
+  width: 320px;
+  height: 650px;
+  border: 12px solid #000000;
+  border-radius: 40px;
+  background: #000;
+  box-shadow: 0 0 50px rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  z-index: 10;
+  transform-origin: center center;
+}
+
+.phone-notch {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 30px;
+  background: #000;
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+  z-index: 20;
+}
+
+.phone-screen {
+  width: 100%;
+  height: 100%;
+  background: #111;
+  position: relative;
+  overflow: hidden;
+}
+
+.app-interface-images {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.app-screen-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* Right Column: Text Content */
+.mobile-col-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  position: relative;
+}
+
+.text-content-wrapper {
+  position: relative;
+  height: 300px; /* Fixed height for text area */
+  display: flex;
+  align-items: center;
+}
+
+.text-block {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  width: 100%;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.text-block.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.feature-title {
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 1.5rem;
+  line-height: 1.1;
+  background: linear-gradient(135deg, #fff 0%, #aaa 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.feature-desc {
+  font-size: 1.25rem;
+  line-height: 1.6;
+  color: #ccc;
+  max-width: 500px;
+}
+
+.mobile-cta-btn {
+  display: inline-block;
+  margin-top: 2rem;
+  padding: 16px 32px;
+  background: #000;
+  color: #357eb1;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 50px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 20px rgba(53, 126, 177, 0.3);
+  width: fit-content;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.mobile-cta-btn:hover {
+  transform: translateY(-2px);
+  background: #142532;
+  box-shadow: 0 15px 30px rgba(53, 126, 177, 0.4);
+}
+
+.background-elements {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.bg-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.3;
+}
+
+.blob-1 {
+  width: 500px;
+  height: 500px;
+  background: #357eb1;
+  top: 10%;
+  left: -10%;
+}
+
+.blob-2 {
+  width: 400px;
+  height: 400px;
+  background: #e46235;
+  bottom: 10%;
+  right: -10%;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .mobile-container {
+    gap: 2rem;
+  }
+
+  .feature-title {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .mobile-section {
+    height: auto;
+    min-height: 100vh;
+    padding: 4rem 1.5rem;
+    align-items: flex-start;
+  }
+
+  .mobile-container {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  .mobile-col-left {
+    height: auto;
+    margin-top: 2rem;
+  }
+
+  .phone-frame {
+    width: 260px;
+    height: 540px;
+  }
+
+  .mobile-col-right {
+    height: auto;
+    text-align: center;
+    align-items: center;
+  }
+
+  .text-content-wrapper {
+    height: auto;
+    min-height: 200px;
+    display: block;
+  }
+
+  .text-block {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    margin-bottom: 2rem;
+    opacity: 1; /* Visible by default on mobile for simple scroll */
+    visibility: visible;
+    display: none; /* Controlled by JS */
+  }
+
+  .text-block.active {
+    display: block;
+  }
+
+  .feature-title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .feature-desc {
+    font-size: 1rem;
+  }
+
+  .mobile-cta-btn {
+    margin-top: 1rem;
+  }
+}

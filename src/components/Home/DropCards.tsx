@@ -14,7 +14,7 @@ interface BodyElement {
   height: number;
 }
 
-const WebTech = () => {
+const DropCards = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const engineRef = useRef<Matter.Engine | null>(null);
@@ -574,27 +574,44 @@ const WebTech = () => {
     };
   }, [updateGravity]);
 
-  const technologies = [
-    "Next.js",
-    "React",
-    "Tailwind CSS",
-    "Flutter",
-    "React Native",
-    "Dart",
-    "TypeScript",
-    "Node.js",
-    "Express",
-    "MongoDB",
-    "PostgreSQL",
-    "Docker",
-    "Kubernetes",
-    "AWS",
-    "Azure",
-    "GCP",
-    "Linux",
-    "Windows",
-    "MacOS",
-    "iOS",
+  const technologies = {
+    web: [
+      "Next.js",
+      "React",
+      "Tailwind CSS",
+      "TypeScript",
+      "Node.js",
+      "Express.js",
+      "MongoDB",
+      "PostgreSQL",
+      "Docker",
+    ],
+    mobile: ["Flutter", "React Native", "Dart"],
+    design: ["Photoshop", "Illustrator", "Figma", "Canva", "Adobe XD"],
+    print: [
+      "banners",
+      "posters",
+      "business cards",
+      "flyers",
+      "brochures",
+      "menus",
+      "leaflet",
+      "billboards",
+    ],
+  };
+
+  const colors = {
+    web: "#e46235",
+    mobile: "#357eb1",
+    design: "#fdc135",
+    print: "#9c93cb",
+  };
+
+  const allTechnologies = [
+    ...technologies.mobile.map((t) => ({ name: t, color: colors.mobile })),
+    ...technologies.web.map((t) => ({ name: t, color: colors.web })),
+    ...technologies.design.map((t) => ({ name: t, color: colors.design })),
+    ...technologies.print.map((t) => ({ name: t, color: colors.print })),
   ];
 
   // Optimize for mobile by reducing number of objects
@@ -611,29 +628,43 @@ const WebTech = () => {
 
   // Use fewer technologies on mobile for better performance
   const displayTechnologies = isMobileDevice
-    ? technologies.slice(0, 12) // Show only 12 items on mobile
-    : technologies;
+    ? [
+        ...technologies.mobile
+          .slice(0, 3)
+          .map((t) => ({ name: t, color: colors.mobile })),
+        ...technologies.web
+          .slice(0, 3)
+          .map((t) => ({ name: t, color: colors.web })),
+        ...technologies.design
+          .slice(0, 3)
+          .map((t) => ({ name: t, color: colors.design })),
+        ...technologies.print
+          .slice(0, 3)
+          .map((t) => ({ name: t, color: colors.print })),
+      ]
+    : allTechnologies;
 
   return (
     <section
       ref={sectionRef}
-      className="w-full max-w-[100vw] h-screen bg-black text-white relative overflow-hidden p-8 z-20! select-none cursor-grab"
+      className="w-full max-w-[100vw] h-screen bg-black text-white relative overflow-hidden p-8 select-none"
     >
       <div
         ref={containerRef}
-        className="object-container absolute top-0 left-0 w-full h-full overflow-hidden"
+        className="object-container absolute top-0 left-0 w-full h-full overflow-hidden z-20!"
       >
         {displayTechnologies.map((tech, index) => (
           <div
             key={index}
-            className="object absolute w-max text-2xl md:text-3xl font-medium bg-[#e46235] text-black px-8! py-4! rounded-[50px] shadow-lg shadow-white/10 cursor-grab select-none pointer-events-auto active:cursor-grabbing"
+            className="object absolute cursor-grab w-max text-2xl md:text-3xl font-medium text-black px-8! py-4! rounded-[50px] shadow-lg shadow-white/10 select-none pointer-events-auto active:cursor-grabbing"
             style={{
+              backgroundColor: tech.color,
               opacity: 0,
               visibility: "hidden",
               zIndex: 0,
             }}
           >
-            <p>{tech}</p>
+            <p>{tech.name}</p>
           </div>
         ))}
       </div>
@@ -647,4 +678,4 @@ const WebTech = () => {
   );
 };
 
-export default WebTech;
+export default DropCards;

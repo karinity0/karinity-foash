@@ -179,7 +179,7 @@ export default function DesignProjects() {
             const sideCards = [card1Ref.current, card3Ref.current];
             gsap.to(sideCards, {
               x: (i: number) => [-15, 15][i],
-              rotationZ: (i: number) => [-5, 5][i],
+              rotationZ: (i: number) => [-3, 5][i],
               duration: 0.75,
               ease: "power3.inOut",
             });
@@ -362,7 +362,7 @@ export default function DesignProjects() {
             const sideCards = [card1Ref.current, card3Ref.current];
             gsap.to(sideCards, {
               y: 30,
-              rotationZ: (i: number) => [-15, 15][i],
+              rotationZ: (i: number) => [-8, 8][i],
               duration: 0.75,
               ease: "power3.inOut",
             });
@@ -399,11 +399,11 @@ export default function DesignProjects() {
   }, []);
 
   return (
-    <section className="sticky-section bg-black/90 relative w-full h-svh p-4 md:p-8 flex justify-center items-center">
+    <section className="sticky-section bg-[#fdc135] relative w-full h-svh p-4 md:p-8 flex justify-center items-center">
       <div className="absolute top-[15%] md:top-[20%] left-1/2 -translate-x-1/2 -translate-y-1/2 px-4 w-full">
         <h3
           ref={stickyHeaderRef}
-          className="text-center will-change-[transform,opacity] translate-y-10 opacity-0 text-[#fdc135] text-3xl! lg:text-6xl!"
+          className="text-center will-change-[transform,opacity] translate-y-10 opacity-0 text-black text-3xl! lg:text-6xl!"
         >
           Where bold ideas become stunning reality
         </h3>

@@ -167,7 +167,7 @@ const Spotlight = () => {
               <img src="/spotlight/spotlight-15.jpg" alt="" />
             </div>
             <div className="marquee-img-item marquee-text-item">
-              <h1>PRINTING</h1>
+              <h1>PRINT</h1>
             </div>
             <div className="marquee-img-item">
               <img src="/spotlight/spotlight-16.jpg" alt="" />

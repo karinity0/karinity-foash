@@ -1,0 +1,290 @@
+.print-section {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  /* Sky Background */
+  background: linear-gradient(to bottom, #9c93cb 0%, #e0f7fa 80%, #f0f0f0 100%);
+  color: #111;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 2000px;
+}
+
+/* Clouds for atmosphere */
+.sky-clouds {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.6;
+}
+
+.cloud {
+  position: absolute;
+  background: #fff;
+  border-radius: 50px;
+  filter: blur(20px);
+}
+
+.cloud-1 {
+  width: 300px;
+  height: 100px;
+  top: 10%;
+  left: 10%;
+  opacity: 0.8;
+}
+.cloud-2 {
+  width: 400px;
+  height: 120px;
+  top: 20%;
+  right: 15%;
+  opacity: 0.6;
+}
+.cloud-3 {
+  width: 200px;
+  height: 80px;
+  top: 40%;
+  left: 40%;
+  opacity: 0.4;
+}
+
+.print-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end; /* Align to bottom for pole */
+  align-items: center;
+  transform-style: preserve-3d;
+  padding-bottom: 0; /* Adjust based on pole height */
+  z-index: 10;
+}
+
+/* The entire billboard structure (Board + Pole) */
+.billboard-structure {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform-style: preserve-3d;
+  margin-bottom: -5vh; /* Push base slightly off screen */
+}
+
+.billboard-wrapper {
+  position: relative;
+  width: 80vw;
+  max-width: 1000px;
+  aspect-ratio: 16 / 8;
+  transform-style: preserve-3d;
+  cursor: pointer;
+  /* Frame */
+  border: 20px solid #333;
+  border-radius: 4px;
+  background: #222;
+  box-shadow: 0 50px 100px rgba(0, 0, 0, 0.3), inset 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Lamps on top */
+.billboard-lamps {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  width: 100%;
+  height: 40px;
+  display: flex;
+  justify-content: space-around;
+  transform-style: preserve-3d;
+}
+
+.lamp {
+  width: 60px;
+  height: 20px;
+  background: #111;
+  position: relative;
+  border-radius: 4px 4px 0 0;
+}
+
+.lamp::after {
+  content: "";
+  position: absolute;
+  bottom: -100px; /* Light cone length */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150px;
+  height: 100px;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.3) 0%,
+    transparent 100%
+  );
+  clip-path: polygon(40% 0, 60% 0, 100% 100%, 0% 100%);
+  pointer-events: none;
+}
+
+.billboard-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem;
+  text-align: center;
+  overflow: hidden;
+  /* Paper texture overlay */
+  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23000000' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
+}
+
+.billboard-pole {
+  width: 60px;
+  height: 50vh; /* Tall pole */
+  background: linear-gradient(to right, #555, #888, #555);
+  margin-top: -2px; /* Connect seamlessly */
+  position: relative;
+  transform-style: preserve-3d;
+  z-index: -1; /* Behind board */
+}
+
+.billboard-base {
+  width: 200px;
+  height: 40px;
+  background: #444;
+  border-radius: 50% 50% 0 0;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Typography & Content */
+.billboard-bg-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) translateZ(-50px);
+  font-size: 12rem;
+  font-weight: 900;
+  color: rgba(0, 0, 0, 0.05);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.billboard-main-text {
+  position: relative;
+  z-index: 10;
+  transform: translateZ(40px);
+}
+
+.print-title {
+  font-size: 4.5rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -2px;
+  margin-bottom: 0.5rem;
+  color: #111;
+  line-height: 0.9;
+}
+
+.print-subtitle {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: #444;
+  max-width: 500px;
+  margin: 0 auto 1.5rem;
+}
+
+.print-cta {
+  display: inline-block;
+  padding: 12px 30px;
+  background: #9c93cb; /* Brand orange */
+  color: #fff;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(228, 98, 53, 0.4);
+}
+
+.print-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(228, 98, 53, 0.6);
+}
+
+/* Sheen */
+.billboard-sheen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0) 30%,
+    rgba(255, 255, 255, 0.4) 50%,
+    rgba(255, 255, 255, 0) 70%
+  );
+  transform: translateZ(2px);
+  pointer-events: none;
+  mix-blend-mode: overlay;
+}
+
+/* Floating Elements */
+.float-element {
+  position: absolute;
+  border-radius: 50%;
+  z-index: 5;
+}
+
+.float-1 {
+  width: 60px;
+  height: 60px;
+  background: #fdc135;
+  top: 15%;
+  right: 15%;
+  transform: translateZ(60px);
+}
+
+.float-2 {
+  width: 40px;
+  height: 40px;
+  background: #357eb1;
+  bottom: 25%;
+  left: 20%;
+  transform: translateZ(40px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .billboard-wrapper {
+    width: 90vw;
+    aspect-ratio: 3/4;
+  }
+
+  .billboard-pole {
+    height: 30vh;
+  }
+
+  .print-title {
+    font-size: 3rem;
+  }
+
+  .billboard-content {
+    padding: 1.5rem;
+  }
+
+  .lamp::after {
+    display: none; /* Hide light cones on mobile for performance/cleanliness */
+  }
+}

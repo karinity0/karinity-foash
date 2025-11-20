@@ -1,5 +1,5 @@
 "use client";
-import "./ShowWeb.css";
+import "./ShowDesign.css";
 import React, { useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -7,8 +7,9 @@ import { useGSAP } from "@gsap/react";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
-const ShowWeb = () => {
+const ShowDesign = () => {
   const showreelSecRef = useRef<HTMLElement>(null);
+  const webTextRef = useRef<HTMLDivElement>(null);
   const [currentFrame, setCurrentFrame] = useState(1);
   const totalFrames = 7;
   const frameInterval = 1500;
@@ -45,6 +46,30 @@ const ShowWeb = () => {
               scale: scaleValue,
               borderRadius: `${borderRadiusValue}rem`,
             });
+          },
+        });
+
+        gsap.to(webTextRef.current, {
+          innerHTML: "Want to see more?",
+          fontSize: "4rem",
+          backgroundColor: "#fdc135",
+          color: "#000",
+          padding: "1rem 3rem",
+          width: "fit-content",
+          margin: "0 auto",
+          borderRadius: "50px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          pointerEvents: "auto",
+          cursor: "pointer",
+          mixBlendMode: "normal",
+          duration: 0.1,
+          scrollTrigger: {
+            trigger: showreelSecRef.current,
+            start: "5% top",
+            end: "5% top",
+            scrub: true,
           },
         });
 
@@ -104,6 +129,31 @@ const ShowWeb = () => {
           },
         });
 
+        gsap.to(webTextRef.current, {
+          innerHTML: "Want to see more?",
+          fontSize: "4rem",
+          backgroundColor: "#fdc135",
+          textAlign: "center",
+          color: "#000",
+          padding: "1rem 6rem",
+          width: "fit-content",
+          margin: "0 auto",
+          borderRadius: "50px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          pointerEvents: "auto",
+          cursor: "pointer",
+          mixBlendMode: "normal",
+          duration: 0.1,
+          scrollTrigger: {
+            trigger: showreelSecRef.current,
+            start: "5% top",
+            end: "5% top",
+            scrub: true,
+          },
+        });
+
         if (scrollTrigger) {
           scrollTriggerInstances.push(scrollTrigger);
         }
@@ -143,10 +193,19 @@ const ShowWeb = () => {
           src={`/showreel/showreel-frame-${currentFrame}.jpg`}
           alt="Showreel frame"
         />
-        <div className="web-text">WEB</div>
+        <div
+          ref={webTextRef}
+          className="web-text"
+          onClick={() => {
+            console.log("Button clicked");
+            // Add navigation or other logic here
+          }}
+        >
+          DESIGN
+        </div>
       </div>
     </section>
   );
 };
 
-export default ShowWeb;
+export default ShowDesign;

@@ -33,7 +33,7 @@
   transform: translate(-50%, -50%);
   font-size: 30rem;
   font-weight: 900;
-  color: var(--base-500);
+  color: #fdc135;
   line-height: 1;
   pointer-events: none;
   text-transform: uppercase;
@@ -43,12 +43,12 @@
 
 @media (max-width: 999px) {
   .showreel .web-text {
-    font-size: 20rem;
+    font-size: 12rem;
   }
 }
 
 @media (max-width: 599px) {
   .showreel .web-text {
-    font-size: 15rem;
+    font-size: 8rem;
   }
 }

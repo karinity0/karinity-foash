@@ -1,7 +1,7 @@
 "use client";
 import "./home.css";
 import Button from "@/components/Button/Button";
-import ShowWeb from "@/components/ShowWeb/ShowWeb";
+import ShowDesign from "@/components/ShowDesign/ShowDesign";
 import FeaturedWork from "@/components/FeaturedWork/FeaturedWork";
 import ClientReviews from "@/components/ClientReviews/ClientReviews";
 import Spotlight from "@/components/Spotlight/Spotlight";
@@ -16,9 +16,11 @@ import gsap from "gsap";
 import { WDP } from "@/components/Home/WDP";
 import { Title } from "@/components/Home/Title";
 import MouseReveal from "@/components/MouseReveal/MouseReveal";
-import WebTech from "@/components/Home/WebTech";
+import DropCards from "@/components/Home/DropCards";
 import WebProject from "@/components/Home/WebProject";
 import DesignProjects from "@/components/Home/DesignProjects";
+import MobileSection from "@/components/MobileSection/MobileSection";
+import PrintSection from "@/components/PrintSection/PrintSection";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -39,7 +41,7 @@ const Page = () => {
 
   return (
     <div className="overflow-x-hidden w-full max-w-[100vw]">
-      <PreLoader />
+      {process.env.NODE_ENV === "development" ? null : <PreLoader />}
 
       <section className="hero overflow-x-hidden">
         <div className="container">
@@ -117,16 +119,16 @@ const Page = () => {
         </div>
       </section> */}
 
-      <Spotlight />
-
-      {/* <ShowWeb /> */}
-
-      <WebTech />
+      <DropCards />
 
       <WebProject />
 
-      {/* Design */}
+      <MobileSection />
+
+      {/* <ShowDesign /> */}
       <DesignProjects />
+
+      <PrintSection />
 
       {/* <CTACard /> */}
 
